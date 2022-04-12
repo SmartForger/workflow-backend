@@ -1,6 +1,7 @@
 import { DataSource } from "typeorm";
 
-import { WorkflowModel } from "./models/WorkflowModel";
+import { Workflow } from "../entities/Workflow";
+import { WorkflowStep } from "../entities/WorkflowStep";
 
 export const getDataSource = () => {
   const dataSource = new DataSource({
@@ -12,7 +13,7 @@ export const getDataSource = () => {
     database: process.env.DB_NAME,
     synchronize: true,
     logging: true,
-    entities: [WorkflowModel],
+    entities: [Workflow, WorkflowStep],
     subscribers: [],
     migrations: [],
   });

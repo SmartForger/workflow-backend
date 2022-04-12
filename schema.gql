@@ -5,8 +5,11 @@
 
 type Mutation {
   createWorkflow(workflowInput: WorkflowCreateInput!): Workflow!
+  createWorkflowStep(workflowStepInput: WorkflowStepCreateInput!): WorkflowStep!
   deleteWorkflow(id: String!): Workflow
+  deleteWorkflowStep(id: String!): WorkflowStep
   updateWorkflow(workflowInput: WorkflowUpdateInput!): Workflow
+  updateWorkflowStep(workflowStepInput: WorkflowStepUpdateInput!): WorkflowStep
 }
 
 type Query {
@@ -20,8 +23,9 @@ type Workflow {
   displayName: String!
   icon: String!
   iconFileName: String!
-  id: String!
+  id: ID!
   name: String!
+  steps: [WorkflowStep!]!
   subCategory: String!
 }
 
@@ -33,6 +37,35 @@ input WorkflowCreateInput {
   iconFileName: String!
   name: String!
   subCategory: String!
+}
+
+type WorkflowStep {
+  description: String!
+  displayName: String!
+  icon: String!
+  iconFileName: String!
+  id: ID!
+  name: String!
+  workflow: Workflow!
+}
+
+input WorkflowStepCreateInput {
+  description: String!
+  displayName: String!
+  icon: String!
+  iconFileName: String!
+  name: String!
+  workflowId: String!
+}
+
+input WorkflowStepUpdateInput {
+  description: String
+  displayName: String
+  icon: String
+  iconFileName: String
+  id: String!
+  name: String
+  workflowId: String
 }
 
 input WorkflowUpdateInput {
