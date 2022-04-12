@@ -1,28 +1,34 @@
 import { v4 as uuid } from "uuid";
-import { Query, Resolver, Mutation, Arg } from "type-graphql";
+import { Query, Resolver, Mutation, Arg, Ctx } from "type-graphql";
 import {
   Workflow,
   WorkflowCreateInput,
   WorkflowUpdateInput,
 } from "../schemas/Workflow";
+import { AppContext } from "../types/AppContext";
+import { WorkflowModel } from "../db/models/WorkflowModel";
+import { Repo } from "../decorators/Repository";
+import { Repository } from "typeorm";
 
-@Resolver((of) => Workflow)
+@Resolver(() => Workflow)
 export class WorkflowResolver {
-  private _workflows: Workflow[] = [];
-
   @Query(() => [Workflow], { nullable: true })
-  workflows(): Workflow[] {
-    return this._workflows;
+  workflows(
+    @Repo(WorkflowModel) repository: Repository<WorkflowModel>
+  ): Promise<Workflow[]> {
+    return repository.find();
   }
 
   @Query(() => Workflow, { nullable: true })
-  workflow(@Arg("id") id: String): Workflow | null {
-    const w = this._workflows.find((w) => w.id === id);
-    return w || null;
+  workflow(
+    @Arg("id") id: string,
+    @Repo(WorkflowModel) repository: Repository<WorkflowModel>
+  ): Promise<Workflow | null> {
+    return repository.findOneBy({ id });
   }
 
   @Mutation(() => Workflow)
-  createWorkflow(
+  async createWorkflow(
     @Arg("workflowInput")
     {
       category,
@@ -32,54 +38,57 @@ export class WorkflowResolver {
       description,
       icon,
       iconFileName,
-    }: WorkflowCreateInput
-  ): Workflow {
-    const workflow = {
-      id: uuid(), // not really unique
-      category,
-      subCategory,
-      name,
-      displayName,
-      description,
-      icon,
-      iconFileName,
-    };
+    }: WorkflowCreateInput,
+    @Ctx() ctx: AppContext
+  ): Promise<Workflow> {
+    const repository = ctx.datasource.getRepository(WorkflowModel);
 
-    this._workflows.push(workflow);
+    const workflow = new WorkflowModel();
+    workflow.id = uuid();
+    workflow.category = category;
+    workflow.subCategory = subCategory;
+    workflow.name = name;
+    workflow.displayName = displayName;
+    workflow.description = description;
+    workflow.icon = icon;
+    workflow.iconFileName = iconFileName;
+
+    await repository.save(workflow);
+
     return workflow;
   }
 
   @Mutation(() => Workflow, { nullable: true })
-  updateWorkflow(
+  async updateWorkflow(
     @Arg("workflowInput")
-    { id, ...details }: WorkflowUpdateInput
-  ): Workflow | null {
-    const index = this._workflows.findIndex((workflow) => workflow.id === id);
+    { id, ...details }: WorkflowUpdateInput,
+    @Repo(WorkflowModel) repository: Repository<WorkflowModel>
+  ): Promise<Workflow | null> {
+    const workflow = await repository.findOneBy({ id });
 
-    if (index < 0) {
+    if (!workflow) {
       return null;
     }
 
-    this._workflows[index] = {
-      ...this._workflows[index],
-      ...details,
-    };
+    Object.assign(workflow, details);
 
-    return this._workflows[index];
+    await repository.save(workflow);
+
+    return workflow;
   }
 
   @Mutation(() => Workflow, { nullable: true })
-  deleteWorkflow(
-    @Arg("id")
-    id: String
-  ): Workflow | null {
-    const index = this._workflows.findIndex((workflow) => workflow.id === id);
+  async deleteWorkflow(
+    @Arg("id") id: string,
+    @Repo(WorkflowModel) repository: Repository<WorkflowModel>
+  ): Promise<Workflow | null> {
+    const workflow = await repository.findOneBy({ id });
 
-    if (index < 0) {
+    if (!workflow) {
       return null;
     }
 
-    const [workflow] = this._workflows.splice(index, 1);
+    await repository.delete(workflow);
 
     return workflow;
   }

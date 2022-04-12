@@ -2,7 +2,9 @@ import "reflect-metadata";
 import { ApolloServer } from "apollo-server-express";
 import * as Express from "express";
 import { buildSchema } from "type-graphql";
+import "dotenv/config";
 
+import { getDataSource } from "./db/datasource";
 import { WorkflowResolver } from "./resolvers/workflow.resolver";
 
 async function main() {
@@ -12,9 +14,11 @@ async function main() {
   });
 
   const app = Express();
+  const datasource = await getDataSource();
 
   const server = new ApolloServer({
     schema,
+    context: { datasource },
   });
 
   await server.start();

@@ -36,5 +36,12 @@ input WorkflowCreateInput {
 }
 
 input WorkflowUpdateInput {
+  category: String
+  description: String
+  displayName: String
+  icon: String
+  iconFileName: String
   id: String!
+  name: String
+  subCategory: String
 }
