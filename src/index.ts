@@ -9,10 +9,16 @@ import { getDataSource } from "./db/datasource";
 import { WorkflowResolver } from "./resolvers/workflow.resolver";
 import { WorkflowStepResolver } from "./resolvers/workflow-step.resolver";
 import { WorkflowEventResolver } from "./resolvers/workflow-event.resolver";
+import { WorkflowWidgetResolver } from "./resolvers/workflow-widget.resolver";
 
 async function main() {
   const schema = await buildSchema({
-    resolvers: [WorkflowResolver, WorkflowStepResolver, WorkflowEventResolver],
+    resolvers: [
+      WorkflowResolver,
+      WorkflowStepResolver,
+      WorkflowEventResolver,
+      WorkflowWidgetResolver,
+    ],
     emitSchemaFile: true,
   });
 
