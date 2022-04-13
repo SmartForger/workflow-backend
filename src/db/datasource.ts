@@ -2,6 +2,7 @@ import { DataSource } from "typeorm";
 
 import { Workflow } from "../entities/Workflow";
 import { WorkflowStep } from "../entities/WorkflowStep";
+import { WorkflowEvent } from "../entities/WorkflowEvent";
 
 export const getDataSource = () => {
   const dataSource = new DataSource({
@@ -13,7 +14,7 @@ export const getDataSource = () => {
     database: process.env.DB_NAME,
     synchronize: true,
     logging: true,
-    entities: [Workflow, WorkflowStep],
+    entities: [Workflow, WorkflowStep, WorkflowEvent],
     subscribers: [],
     migrations: [],
   });

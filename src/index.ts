@@ -8,10 +8,11 @@ import "dotenv/config";
 import { getDataSource } from "./db/datasource";
 import { WorkflowResolver } from "./resolvers/workflow.resolver";
 import { WorkflowStepResolver } from "./resolvers/workflow-step.resolver";
+import { WorkflowEventResolver } from "./resolvers/workflow-event.resolver";
 
 async function main() {
   const schema = await buildSchema({
-    resolvers: [WorkflowResolver, WorkflowStepResolver],
+    resolvers: [WorkflowResolver, WorkflowStepResolver, WorkflowEventResolver],
     emitSchemaFile: true,
   });
 

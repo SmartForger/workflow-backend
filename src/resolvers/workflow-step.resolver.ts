@@ -1,6 +1,5 @@
 import { v4 as uuid } from "uuid";
-import { Resolver, Mutation, Arg, Ctx } from "type-graphql";
-import { AppContext } from "../types/AppContext";
+import { Resolver, Mutation, Arg } from "type-graphql";
 import { Repo } from "../decorators/Repository";
 import { Repository } from "typeorm";
 import { WorkflowStepCreateInput } from "../inputs/WorkflowStepCreateInput";
@@ -12,28 +11,25 @@ import { Workflow } from "../entities/Workflow";
 export class WorkflowStepResolver {
   @Mutation(() => WorkflowStep)
   async createWorkflowStep(
-    @Arg("workflowStepInput")
-    workflowStepInput: WorkflowStepCreateInput,
-    @Ctx() ctx: AppContext
+    @Arg("stepInput") stepInput: WorkflowStepCreateInput,
+    @Repo(WorkflowStep) repository: Repository<WorkflowStep>
   ): Promise<WorkflowStep> {
-    const repository = ctx.datasource.getRepository(WorkflowStep);
+    const step = new WorkflowStep(stepInput);
+    step.id = uuid();
+    step.workflow = new Workflow({ id: stepInput.workflowId });
 
-    const workflowStep = new WorkflowStep(workflowStepInput);
-    workflowStep.id = uuid();
-    workflowStep.workflow = new Workflow({ id: workflowStepInput.workflowId });
+    await repository.save(step);
 
-    await repository.save(workflowStep);
-
-    return workflowStep;
+    return step;
   }
 
   @Mutation(() => WorkflowStep, { nullable: true })
   async updateWorkflowStep(
-    @Arg("workflowStepInput")
+    @Arg("stepInput")
     { id, ...details }: WorkflowStepUpdateInput,
-    @Repo(WorkflowStep) stepRepository: Repository<WorkflowStep>,
+    @Repo(WorkflowStep) repository: Repository<WorkflowStep>
   ): Promise<WorkflowStep | null> {
-    const step = await stepRepository.findOneBy({ id });
+    const step = await repository.findOneBy({ id });
 
     if (!step) {
       return null;
@@ -45,7 +41,7 @@ export class WorkflowStepResolver {
       step.workflow = new Workflow({ id: details.workflowId });
     }
 
-    await stepRepository.save(step);
+    await repository.save(step);
 
     return step;
   }
@@ -55,14 +51,14 @@ export class WorkflowStepResolver {
     @Arg("id") id: string,
     @Repo(WorkflowStep) repository: Repository<WorkflowStep>
   ): Promise<WorkflowStep | null> {
-    const workflow = await repository.findOneBy({ id });
+    const step = await repository.findOneBy({ id });
 
-    if (!workflow) {
+    if (!step) {
       return null;
     }
 
-    await repository.delete(workflow);
+    await repository.delete(step);
 
-    return workflow;
+    return step;
   }
 }
