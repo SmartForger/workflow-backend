@@ -4,6 +4,7 @@ import { Entity, PrimaryColumn, Column, ManyToOne, OneToMany } from "typeorm";
 import { Base } from "../types/Base";
 import { Workflow } from "./Workflow";
 import { WorkflowEvent } from "./WorkflowEvent";
+import { WorkflowLayout } from "./WorkflowLayout";
 import { WorkflowWidget } from "./WorkflowWidget";
 
 @ObjectType()
@@ -47,4 +48,9 @@ export class WorkflowStep extends Base<WorkflowStep> {
   @OneToMany(() => WorkflowWidget, (widget) => widget.step)
   @TypeormLoader()
   widgets: WorkflowWidget[];
+
+  @Field(() => [WorkflowLayout])
+  @OneToMany(() => WorkflowLayout, (layout) => layout.step)
+  @TypeormLoader()
+  layouts: WorkflowLayout[];
 }

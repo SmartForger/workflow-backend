@@ -4,6 +4,7 @@ import { Workflow } from "../entities/Workflow";
 import { WorkflowStep } from "../entities/WorkflowStep";
 import { WorkflowEvent } from "../entities/WorkflowEvent";
 import { WorkflowWidget } from "../entities/WorkflowWidget";
+import { WorkflowLayout } from "../entities/WorkflowLayout";
 
 export const getDataSource = () => {
   const dataSource = new DataSource({
@@ -15,7 +16,13 @@ export const getDataSource = () => {
     database: process.env.DB_NAME,
     synchronize: true,
     logging: true,
-    entities: [Workflow, WorkflowStep, WorkflowEvent, WorkflowWidget],
+    entities: [
+      Workflow,
+      WorkflowStep,
+      WorkflowEvent,
+      WorkflowWidget,
+      WorkflowLayout,
+    ],
     subscribers: [],
     migrations: [],
   });

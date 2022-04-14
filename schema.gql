@@ -6,14 +6,17 @@
 type Mutation {
   createWorkflow(workflowInput: WorkflowCreateInput!): Workflow!
   createWorkflowEvent(eventInput: WorkflowEventCreateInput!): WorkflowEvent!
+  createWorkflowLayout(layoutInput: WorkflowLayoutCreateInput!): WorkflowLayout!
   createWorkflowStep(stepInput: WorkflowStepCreateInput!): WorkflowStep!
   createWorkflowWidget(widgetInput: WorkflowWidgetCreateInput!): WorkflowWidget!
   deleteWorkflow(id: String!): Workflow
   deleteWorkflowEvent(id: String!): WorkflowEvent
+  deleteWorkflowLayout(id: String!): WorkflowLayout
   deleteWorkflowStep(id: String!): WorkflowStep
   deleteWorkflowWidget(id: String!): WorkflowWidget
   updateWorkflow(workflowInput: WorkflowUpdateInput!): Workflow
   updateWorkflowEvent(eventInput: WorkflowEventUpdateInput!): WorkflowEvent
+  updateWorkflowLayout(layoutInput: WorkflowLayoutUpdateInput!): WorkflowLayout
   updateWorkflowStep(stepInput: WorkflowStepUpdateInput!): WorkflowStep
   updateWorkflowWidget(widgetInput: WorkflowWidgetUpdateInput!): WorkflowWidget
 }
@@ -71,6 +74,39 @@ input WorkflowEventUpdateInput {
   stepId: String
 }
 
+type WorkflowLayout {
+  backgroundColor: String!
+  icon: String!
+  iconFileName: String!
+  id: ID!
+  step: WorkflowStep!
+  textColor: String!
+  title: String!
+  visible: Boolean!
+  widgets: [WorkflowWidget!]!
+}
+
+input WorkflowLayoutCreateInput {
+  backgroundColor: String!
+  icon: String!
+  iconFileName: String!
+  stepId: String!
+  textColor: String!
+  title: String!
+  visible: Boolean!
+}
+
+input WorkflowLayoutUpdateInput {
+  backgroundColor: String
+  icon: String
+  iconFileName: String
+  id: String!
+  stepId: String
+  textColor: String
+  title: String
+  visible: Boolean
+}
+
 type WorkflowStep {
   description: String!
   displayName: String!
@@ -78,6 +114,7 @@ type WorkflowStep {
   icon: String!
   iconFileName: String!
   id: ID!
+  layouts: [WorkflowLayout!]!
   name: String!
   widgets: [WorkflowWidget!]!
   workflow: Workflow!
@@ -120,6 +157,7 @@ type WorkflowWidget {
   icon: String!
   iconFileName: String!
   id: ID!
+  layout: WorkflowLayout!
   step: WorkflowStep!
   type: String!
   updateEvent: String!
@@ -131,7 +169,8 @@ input WorkflowWidgetCreateInput {
   field: String!
   icon: String!
   iconFileName: String!
-  stepId: String!
+  layoutId: String
+  stepId: String
   type: String!
   updateEvent: String!
 }
@@ -143,6 +182,7 @@ input WorkflowWidgetUpdateInput {
   icon: String
   iconFileName: String
   id: String!
+  layoutId: String
   stepId: String
   type: String
   updateEvent: String

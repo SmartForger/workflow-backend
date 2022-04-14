@@ -1,28 +1,20 @@
 import { Field, ID, ObjectType } from "type-graphql";
 import { TypeormLoader } from "type-graphql-dataloader";
-import { Entity, PrimaryColumn, Column, ManyToOne } from "typeorm";
+import { Entity, PrimaryColumn, Column, ManyToOne, OneToMany } from "typeorm";
 import { Base } from "../types/Base";
-import { WorkflowLayout } from "./WorkflowLayout";
 import { WorkflowStep } from "./WorkflowStep";
+import { WorkflowWidget } from "./WorkflowWidget";
 
 @ObjectType()
 @Entity()
-export class WorkflowWidget extends Base<WorkflowWidget> {
+export class WorkflowLayout extends Base<WorkflowLayout> {
   @Field(() => ID)
   @PrimaryColumn()
   id: string;
 
   @Field()
   @Column()
-  type: string;
-
-  @Field()
-  @Column()
-  displayName: string;
-
-  @Field()
-  @Column()
-  description: string;
+  title: string;
 
   @Field()
   @Column()
@@ -34,19 +26,23 @@ export class WorkflowWidget extends Base<WorkflowWidget> {
 
   @Field()
   @Column()
-  field: string;
+  backgroundColor: string;
 
   @Field()
   @Column()
-  updateEvent: string;
+  textColor: string;
+
+  @Field()
+  @Column()
+  visible: boolean;
 
   @Field(() => WorkflowStep)
   @ManyToOne(() => WorkflowStep, (step) => step.events)
   @TypeormLoader()
   step: WorkflowStep;
 
-  @Field(() => WorkflowLayout)
-  @ManyToOne(() => WorkflowLayout, (layout) => layout.widgets)
+  @Field(() => [WorkflowWidget])
+  @OneToMany(() => WorkflowWidget, (widget) => widget.layout)
   @TypeormLoader()
-  layout: WorkflowLayout;
+  widgets: WorkflowWidget[];
 }

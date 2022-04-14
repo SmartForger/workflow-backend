@@ -10,6 +10,7 @@ import { WorkflowResolver } from "./resolvers/workflow.resolver";
 import { WorkflowStepResolver } from "./resolvers/workflow-step.resolver";
 import { WorkflowEventResolver } from "./resolvers/workflow-event.resolver";
 import { WorkflowWidgetResolver } from "./resolvers/workflow-widget.resolver";
+import { WorkflowLayoutResolver } from "./resolvers/workflow-layout.resolver";
 
 async function main() {
   const schema = await buildSchema({
@@ -18,6 +19,7 @@ async function main() {
       WorkflowStepResolver,
       WorkflowEventResolver,
       WorkflowWidgetResolver,
+      WorkflowLayoutResolver,
     ],
     emitSchemaFile: true,
   });

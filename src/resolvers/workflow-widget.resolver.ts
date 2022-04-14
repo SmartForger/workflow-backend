@@ -6,6 +6,7 @@ import { WorkflowStep } from "../entities/WorkflowStep";
 import { WorkflowWidget } from "../entities/WorkflowWidget";
 import { WorkflowWidgetCreateInput } from "../inputs/WorkflowWidgetCreateInput";
 import { WorkflowWidgetUpdateInput } from "../inputs/WorkflowWidgetUpdateInput";
+import { WorkflowLayout } from "../entities/WorkflowLayout";
 
 @Resolver(() => WorkflowWidget)
 export class WorkflowWidgetResolver {
@@ -16,7 +17,13 @@ export class WorkflowWidgetResolver {
   ): Promise<WorkflowWidget> {
     const widget = new WorkflowWidget(widgetInput);
     widget.id = uuid();
-    widget.step = new WorkflowStep({ id: widgetInput.stepId });
+
+    if (widgetInput.layoutId) {
+      widget.layout = new WorkflowLayout({ id: widgetInput.layoutId });
+    }
+    if (widgetInput.stepId) {
+      widget.step = new WorkflowStep({ id: widgetInput.stepId });
+    }
 
     await repository.save(widget);
 

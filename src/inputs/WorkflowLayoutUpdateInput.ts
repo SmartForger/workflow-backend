@@ -1,19 +1,13 @@
 import { Field, InputType } from "type-graphql";
-import { WorkflowWidget } from "../entities/WorkflowWidget";
+import { WorkflowLayout } from "../entities/WorkflowLayout";
 
 @InputType()
-export class WorkflowWidgetUpdateInput implements Partial<WorkflowWidget> {
+export class WorkflowLayoutUpdateInput implements Partial<WorkflowLayout> {
   @Field()
   id: string;
 
   @Field({ nullable: true })
-  type: string;
-
-  @Field({ nullable: true })
-  displayName: string;
-
-  @Field({ nullable: true })
-  description: string;
+  title: string;
 
   @Field({ nullable: true })
   icon: string;
@@ -22,14 +16,14 @@ export class WorkflowWidgetUpdateInput implements Partial<WorkflowWidget> {
   iconFileName: string;
 
   @Field({ nullable: true })
-  field: string;
+  backgroundColor: string;
 
   @Field({ nullable: true })
-  updateEvent: string;
+  textColor: string;
+
+  @Field({ nullable: true })
+  visible: boolean;
 
   @Field({ nullable: true })
   stepId: string;
-
-  @Field({ nullable: true })
-  layoutId: string;
 }
