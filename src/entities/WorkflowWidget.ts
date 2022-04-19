@@ -41,12 +41,12 @@ export class WorkflowWidget extends Base<WorkflowWidget> {
   updateEvent: string;
 
   @Field(() => WorkflowStep)
-  @ManyToOne(() => WorkflowStep, (step) => step.events)
+  @ManyToOne(() => WorkflowStep, (step) => step.events, { onDelete: 'CASCADE' })
   @TypeormLoader()
   step: WorkflowStep;
 
   @Field(() => WorkflowLayout)
-  @ManyToOne(() => WorkflowLayout, (layout) => layout.widgets)
+  @ManyToOne(() => WorkflowLayout, (layout) => layout.widgets, { onDelete: 'CASCADE' })
   @TypeormLoader()
   layout: WorkflowLayout;
 }

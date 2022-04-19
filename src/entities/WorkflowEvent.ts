@@ -28,7 +28,7 @@ export class WorkflowEvent extends Base<WorkflowEvent> {
   condition: string;
 
   @Field(() => WorkflowStep)
-  @ManyToOne(() => WorkflowStep, (step) => step.events)
+  @ManyToOne(() => WorkflowStep, (step) => step.events, { onDelete: "CASCADE" })
   @TypeormLoader()
   step: WorkflowStep;
 }

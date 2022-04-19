@@ -35,7 +35,7 @@ export class WorkflowStep extends Base<WorkflowStep> {
   iconFileName: string;
 
   @Field(() => Workflow)
-  @ManyToOne(() => Workflow, (workflow) => workflow.steps)
+  @ManyToOne(() => Workflow, (workflow) => workflow.steps, { onDelete: 'CASCADE' })
   @TypeormLoader()
   workflow: Workflow;
 

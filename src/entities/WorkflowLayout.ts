@@ -37,7 +37,7 @@ export class WorkflowLayout extends Base<WorkflowLayout> {
   visible: boolean;
 
   @Field(() => WorkflowStep)
-  @ManyToOne(() => WorkflowStep, (step) => step.events)
+  @ManyToOne(() => WorkflowStep, (step) => step.events, { onDelete: 'CASCADE' })
   @TypeormLoader()
   step: WorkflowStep;
 
