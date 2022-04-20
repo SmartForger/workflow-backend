@@ -57,7 +57,7 @@ export class WorkflowStepResolver {
       return null;
     }
 
-    await repository.delete(step);
+    await repository.delete(step.id);
 
     return step;
   }

@@ -70,7 +70,7 @@ export class WorkflowResolver {
       return null;
     }
 
-    await repository.delete(workflow);
+    await repository.delete(workflow.id);
 
     return workflow;
   }

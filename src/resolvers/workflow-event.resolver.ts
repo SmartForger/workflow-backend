@@ -57,7 +57,7 @@ export class WorkflowEventResolver {
       return null;
     }
 
-    await repository.delete(event);
+    await repository.delete(event.id);
 
     return event;
   }

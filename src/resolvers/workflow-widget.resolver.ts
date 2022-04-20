@@ -64,7 +64,7 @@ export class WorkflowWidgetResolver {
       return null;
     }
 
-    await repository.delete(widget);
+    await repository.delete(widget.id);
 
     return widget;
   }

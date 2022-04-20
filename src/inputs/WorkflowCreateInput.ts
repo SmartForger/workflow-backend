@@ -18,6 +18,9 @@ export class WorkflowCreateInput implements Partial<Workflow> {
   @Field()
   description: string;
 
+  @Field(() => [String])
+  mode: string[];
+
   @Field()
   icon: string;
 

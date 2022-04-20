@@ -21,6 +21,9 @@ export class WorkflowUpdateInput implements Partial<Workflow> {
   @Field({ nullable: true })
   description: string;
 
+  @Field(() => [String], { nullable: true })
+  mode: string[];
+
   @Field({ nullable: true })
   icon: string;
 

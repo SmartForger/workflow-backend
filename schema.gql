@@ -33,6 +33,7 @@ type Workflow {
   icon: String!
   iconFileName: String!
   id: ID!
+  mode: [String!]!
   name: String!
   steps: [WorkflowStep!]!
   subCategory: String!
@@ -44,6 +45,7 @@ input WorkflowCreateInput {
   displayName: String!
   icon: String!
   iconFileName: String!
+  mode: [String!]!
   name: String!
   subCategory: String!
 }
@@ -146,6 +148,7 @@ input WorkflowUpdateInput {
   icon: String
   iconFileName: String
   id: String!
+  mode: [String!]
   name: String
   subCategory: String
 }

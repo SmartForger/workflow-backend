@@ -57,7 +57,7 @@ export class WorkflowLayoutResolver {
       return null;
     }
 
-    await repository.delete(layout);
+    await repository.delete(layout.id);
 
     return layout;
   }

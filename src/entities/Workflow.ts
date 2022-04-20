@@ -31,6 +31,17 @@ export class Workflow extends Base<Workflow> {
   @Column()
   description: string;
 
+  @Field(() => [String])
+  @Column({
+    type: "varchar",
+    length: 1024,
+    transformer: {
+      to: (value: string[]) => value.join(),
+      from: (value: string | null) => value?.split(",") || [],
+    },
+  })
+  mode: string[];
+
   @Field()
   @Column()
   icon: string;
