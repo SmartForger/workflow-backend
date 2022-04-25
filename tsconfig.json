@@ -2,6 +2,7 @@
   "compilerOptions": {
     "target": "es2016",
     "module": "commonjs",
+    "allowSyntheticDefaultImports": true,
     "lib": ["dom", "es2016", "esnext.asynciterable"],
     "moduleResolution": "node",
     "outDir": "./dist",

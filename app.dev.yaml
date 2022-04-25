@@ -1,0 +1,10 @@
+runtime: nodejs14
+service: prodeo-eureka-backend
+env: flex
+env_variables:
+  NODE_ENV: 'production'
+  DB_HOST: sm://prodeo-dev-252a8/dbhost
+  DB_PORT: sm://prodeo-dev-252a8/dbport
+  DB_USER: sm://prodeo-dev-252a8/dbuser
+  DB_PASSWORD: sm://prodeo-dev-252a8/dbpassword
+  DB_NAME: sm://prodeo-dev-252a8/dbname

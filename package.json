@@ -4,7 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon --exec ts-node src/index.ts"
+    "build": "tsc",
+    "start": "./scripts/start.sh",
+    "serve": "node dist/index.js",
+    "dev": "nodemon --exec ts-node src/index.ts",
+    "migration:generate": "npm run typeorm migration:generate -- -d src/db/datasource.ts ",
+    "migration:run": "npm run typeorm -- migration:run -d src/db/datasource.ts",
+    "typeorm": "typeorm-ts-node-esm",
+    "deploy:dev": "gcloud app deploy app.dev.yaml"
   },
   "keywords": [],
   "author": "",
@@ -26,8 +33,14 @@
     "@types/lodash": "^4.14.181",
     "@types/node": "^17.0.23",
     "@types/uuid": "^8.3.4",
+    "@types/validator": "^13.7.2",
     "dotenv": "^16.0.0",
     "nodemon": "^2.0.15",
-    "ts-node": "^10.7.0"
+    "ts-node": "^10.7.0",
+    "typescript": "^4.6.3"
+  },
+  "engines": {
+    "node": ">=14",
+    "npm": ">= 6.13.4"
   }
 }
