@@ -1,8 +1,8 @@
 .git/
 node_modules/
-scripts/
 src/
 .env
 .gitignore
 tsconfig.json
 .DS_Store
+env.yaml

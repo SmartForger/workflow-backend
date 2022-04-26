@@ -3,4 +3,4 @@ if [[ -f "$ENVFILE" ]]; then
   source $ENVFILE
 fi
 
-berglas exec -- npm run dev
+berglas exec -- npm run migration:run
