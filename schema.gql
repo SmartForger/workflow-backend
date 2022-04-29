@@ -3,7 +3,14 @@
 # !!!   DO NOT MODIFY THIS FILE BY YOURSELF   !!!
 # -----------------------------------------------
 
+input CreateSignedURLInput {
+  contentType: String!
+  fileName: String!
+  origin: String!
+}
+
 type Mutation {
+  createSignedURL(input: CreateSignedURLInput!): SignedURL!
   createWorkflow(workflowInput: WorkflowCreateInput!): Workflow!
   createWorkflowEvent(eventInput: WorkflowEventCreateInput!): WorkflowEvent!
   createWorkflowLayout(layoutInput: WorkflowLayoutCreateInput!): WorkflowLayout!
@@ -24,6 +31,12 @@ type Mutation {
 type Query {
   workflow(id: String!): Workflow
   workflows: [Workflow!]
+}
+
+type SignedURL {
+  expiresAt: Float
+  newFileName: String
+  url: String
 }
 
 type Workflow {
