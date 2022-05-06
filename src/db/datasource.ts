@@ -1,6 +1,7 @@
 import { DataSource } from "typeorm";
 import "dotenv/config";
 
+import { WorkflowAction } from "../entities/WorkflowAction";
 import { Workflow } from "../entities/Workflow";
 import { WorkflowStep } from "../entities/WorkflowStep";
 import { WorkflowEvent } from "../entities/WorkflowEvent";
@@ -8,6 +9,7 @@ import { WorkflowWidget } from "../entities/WorkflowWidget";
 import { WorkflowLayout } from "../entities/WorkflowLayout";
 
 import { initialMigration1650615859817 } from "./migrations/1650615859817-initialMigration";
+import { addWorkflowAction1651692610477 } from "./migrations/1651692610477-addWorkflowAction";
 
 const dataSource = new DataSource({
   type: "postgres",
@@ -24,9 +26,10 @@ const dataSource = new DataSource({
     WorkflowEvent,
     WorkflowWidget,
     WorkflowLayout,
+    WorkflowAction,
   ],
   subscribers: [],
-  migrations: [initialMigration1650615859817],
+  migrations: [initialMigration1650615859817, addWorkflowAction1651692610477],
 });
 
 export default dataSource;

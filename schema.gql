@@ -12,16 +12,19 @@ input CreateSignedURLInput {
 type Mutation {
   createSignedURL(input: CreateSignedURLInput!): SignedURL!
   createWorkflow(workflowInput: WorkflowCreateInput!): Workflow!
+  createWorkflowAction(workflowActionInput: WorkflowActionCreateInput!): WorkflowAction!
   createWorkflowEvent(eventInput: WorkflowEventCreateInput!): WorkflowEvent!
   createWorkflowLayout(layoutInput: WorkflowLayoutCreateInput!): WorkflowLayout!
   createWorkflowStep(stepInput: WorkflowStepCreateInput!): WorkflowStep!
   createWorkflowWidget(widgetInput: WorkflowWidgetCreateInput!): WorkflowWidget!
   deleteWorkflow(id: String!): Workflow
+  deleteWorkflowAction(id: String!): WorkflowAction
   deleteWorkflowEvent(id: String!): WorkflowEvent
   deleteWorkflowLayout(id: String!): WorkflowLayout
   deleteWorkflowStep(id: String!): WorkflowStep
   deleteWorkflowWidget(id: String!): WorkflowWidget
   updateWorkflow(workflowInput: WorkflowUpdateInput!): Workflow
+  updateWorkflowAction(workflowActionInput: WorkflowActionUpdateInput!): WorkflowAction
   updateWorkflowEvent(eventInput: WorkflowEventUpdateInput!): WorkflowEvent
   updateWorkflowLayout(layoutInput: WorkflowLayoutUpdateInput!): WorkflowLayout
   updateWorkflowStep(stepInput: WorkflowStepUpdateInput!): WorkflowStep
@@ -30,6 +33,8 @@ type Mutation {
 
 type Query {
   workflow(id: String!): Workflow
+  workflowAction(id: String!): WorkflowAction
+  workflowActions: [WorkflowAction!]
   workflows: [Workflow!]
 }
 
@@ -50,6 +55,32 @@ type Workflow {
   name: String!
   steps: [WorkflowStep!]!
   subCategory: String!
+}
+
+type WorkflowAction {
+  categories: [String!]!
+  code: String!
+  content: String!
+  id: ID!
+  name: String!
+  type: String!
+}
+
+input WorkflowActionCreateInput {
+  categories: [String!]!
+  code: String!
+  content: String!
+  name: String!
+  type: String!
+}
+
+input WorkflowActionUpdateInput {
+  categories: [String!]
+  code: String
+  content: String
+  id: String!
+  name: String
+  type: String
 }
 
 input WorkflowCreateInput {
