@@ -1,10 +1,10 @@
 import { v4 as uuid } from "uuid";
 import { Repository } from "typeorm";
 import { Query, Resolver, Mutation, Arg } from "type-graphql";
-import { Repo } from "../decorators/Repository";
-import { WorkflowAction } from "../entities/WorkflowAction";
-import { WorkflowActionCreateInput } from "../inputs/WorkflowActionCreateInput";
-import { WorkflowActionUpdateInput } from "../inputs/WorkflowActionUpdateInput";
+import { Repo } from "../../decorators/Repository";
+import { WorkflowAction } from "../../entities/WorkflowAction";
+import { WorkflowActionCreateInput } from "./inputs/WorkflowActionCreateInput";
+import { WorkflowActionUpdateInput } from "./inputs/WorkflowActionUpdateInput";
 
 @Resolver(() => WorkflowAction)
 export class WorkflowActionResolver {

@@ -1,16 +1,10 @@
 import { Field, InputType } from "type-graphql";
-import { Workflow } from "../entities/Workflow";
+import { WorkflowStep } from "../../../entities/WorkflowStep";
 
 @InputType()
-export class WorkflowUpdateInput implements Partial<Workflow> {
+export class WorkflowStepUpdateInput implements Partial<WorkflowStep> {
   @Field()
   id: string;
-
-  @Field({ nullable: true })
-  category: string;
-
-  @Field({ nullable: true })
-  subCategory: string;
 
   @Field({ nullable: true })
   name: string;
@@ -21,12 +15,12 @@ export class WorkflowUpdateInput implements Partial<Workflow> {
   @Field({ nullable: true })
   description: string;
 
-  @Field(() => [String], { nullable: true })
-  mode: string[];
-
   @Field({ nullable: true })
   icon: string;
 
   @Field({ nullable: true })
   iconFileName: string;
+
+  @Field({ nullable: true })
+  workflowId: string;
 }

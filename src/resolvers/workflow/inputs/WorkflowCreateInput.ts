@@ -1,5 +1,5 @@
 import { Field, InputType } from "type-graphql";
-import { Workflow } from "../entities/Workflow";
+import { Workflow } from "../../../entities/Workflow";
 
 @InputType()
 export class WorkflowCreateInput implements Partial<Workflow> {

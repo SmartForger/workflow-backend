@@ -1,11 +1,11 @@
 import { v4 as uuid } from "uuid";
-import { Resolver, Mutation, Arg } from "type-graphql";
-import { Repo } from "../decorators/Repository";
 import { Repository } from "typeorm";
-import { WorkflowStepCreateInput } from "../inputs/WorkflowStepCreateInput";
-import { WorkflowStep } from "../entities/WorkflowStep";
-import { WorkflowStepUpdateInput } from "../inputs/WorkflowStepUpdateInput";
-import { Workflow } from "../entities/Workflow";
+import { Resolver, Mutation, Arg } from "type-graphql";
+import { Repo } from "../../decorators/Repository";
+import { WorkflowStep } from "../../entities/WorkflowStep";
+import { Workflow } from "../../entities/Workflow";
+import { WorkflowStepCreateInput } from "./inputs/WorkflowStepCreateInput";
+import { WorkflowStepUpdateInput } from "./inputs/WorkflowStepUpdateInput";
 
 @Resolver(() => WorkflowStep)
 export class WorkflowStepResolver {

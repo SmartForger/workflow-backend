@@ -1,12 +1,12 @@
 import { v4 as uuid } from "uuid";
-import { Resolver, Mutation, Arg } from "type-graphql";
-import { Repo } from "../decorators/Repository";
 import { Repository } from "typeorm";
-import { WorkflowStep } from "../entities/WorkflowStep";
-import { WorkflowWidget } from "../entities/WorkflowWidget";
-import { WorkflowWidgetCreateInput } from "../inputs/WorkflowWidgetCreateInput";
-import { WorkflowWidgetUpdateInput } from "../inputs/WorkflowWidgetUpdateInput";
-import { WorkflowLayout } from "../entities/WorkflowLayout";
+import { Resolver, Mutation, Arg } from "type-graphql";
+import { Repo } from "../../decorators/Repository";
+import { WorkflowStep } from "../../entities/WorkflowStep";
+import { WorkflowWidget } from "../../entities/WorkflowWidget";
+import { WorkflowWidgetCreateInput } from "./inputs/WorkflowWidgetCreateInput";
+import { WorkflowWidgetUpdateInput } from "./inputs/WorkflowWidgetUpdateInput";
+import { WorkflowLayout } from "../../entities/WorkflowLayout";
 
 @Resolver(() => WorkflowWidget)
 export class WorkflowWidgetResolver {

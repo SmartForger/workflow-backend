@@ -5,13 +5,13 @@ import { buildSchema } from "type-graphql";
 import { ApolloServerLoaderPlugin } from "type-graphql-dataloader";
 
 import datasource from "./db/datasource";
-import { WorkflowResolver } from "./resolvers/workflow.resolver";
-import { WorkflowStepResolver } from "./resolvers/workflow-step.resolver";
-import { WorkflowEventResolver } from "./resolvers/workflow-event.resolver";
-import { WorkflowWidgetResolver } from "./resolvers/workflow-widget.resolver";
-import { WorkflowLayoutResolver } from "./resolvers/workflow-layout.resolver";
-import { CloudStorageResolver } from "./resolvers/cloud-storage.resolver";
-import { WorkflowActionResolver } from "./resolvers/workflow-action.resolver";
+import { WorkflowResolver } from "./resolvers/workflow";
+import { WorkflowStepResolver } from "./resolvers/workflow-step";
+import { WorkflowEventResolver } from "./resolvers/workflow-event";
+import { WorkflowWidgetResolver } from "./resolvers/workflow-widget";
+import { WorkflowLayoutResolver } from "./resolvers/workflow-layout";
+import { CloudStorageResolver } from "./resolvers/cloud-storage";
+import { WorkflowActionResolver } from "./resolvers/workflow-action";
 
 async function main() {
   const schema = await buildSchema({

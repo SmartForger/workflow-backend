@@ -1,5 +1,5 @@
 import { Field, InputType } from "type-graphql";
-import { WorkflowEvent } from "../entities/WorkflowEvent";
+import { WorkflowEvent } from "../../../entities/WorkflowEvent";
 
 @InputType()
 export class WorkflowEventUpdateInput implements Partial<WorkflowEvent> {
