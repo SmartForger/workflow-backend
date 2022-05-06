@@ -13,5 +13,8 @@ export class WorkflowEventUpdateInput implements Partial<WorkflowEvent> {
   description: string;
 
   @Field({ nullable: true })
+  targetId: string;
+
+  @Field({ nullable: true })
   stepId: string;
 }

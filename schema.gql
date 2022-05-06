@@ -108,6 +108,7 @@ type WorkflowEvent {
   id: ID!
   name: String!
   step: WorkflowStep!
+  target: WorkflowStep
 }
 
 type WorkflowEventAction {
@@ -151,6 +152,7 @@ input WorkflowEventCreateInput {
   description: String!
   name: String!
   stepId: String!
+  targetId: String
 }
 
 input WorkflowEventUpdateInput {
@@ -158,6 +160,7 @@ input WorkflowEventUpdateInput {
   id: String!
   name: String
   stepId: String
+  targetId: String
 }
 
 type WorkflowLayout {

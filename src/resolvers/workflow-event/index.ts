@@ -17,6 +17,9 @@ export class WorkflowEventResolver {
     const event = new WorkflowEvent(eventInput);
     event.id = uuid();
     event.step = new WorkflowStep({ id: eventInput.stepId });
+    if (eventInput.targetId) {
+      event.target = new WorkflowStep({ id: eventInput.targetId });
+    }
 
     await repository.save(event);
 
@@ -26,8 +29,9 @@ export class WorkflowEventResolver {
   @Mutation(() => WorkflowEvent, { nullable: true })
   async updateWorkflowEvent(
     @Arg("eventInput")
-    { id, stepId, ...details }: WorkflowEventUpdateInput,
-    @Repo(WorkflowEvent) repository: Repository<WorkflowEvent>
+    { id, stepId, targetId, ...details }: WorkflowEventUpdateInput,
+    @Repo(WorkflowEvent) repository: Repository<WorkflowEvent>,
+    @Repo(WorkflowStep) stepRepository: Repository<WorkflowStep>
   ): Promise<WorkflowEvent | null> {
     const event = await repository.findOneBy({ id });
 
@@ -38,7 +42,16 @@ export class WorkflowEventResolver {
     Object.assign(event, details);
 
     if (stepId) {
-      event.step = new WorkflowStep({ id: stepId });
+      const step = await stepRepository.findOneBy({ id: stepId });
+      if (step) {
+        event.step = step;
+      } else {
+        throw new Error("Invalid stepId");
+      }
+    }
+    if (targetId) {
+      const target = await stepRepository.findOneBy({ id: targetId });
+      event.target = target;
     }
 
     await repository.save(event);

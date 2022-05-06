@@ -16,6 +16,7 @@ import { WorkflowEventCondition } from "../entities/WorkflowEventCondition";
 import { addEventConditionAndEventAction1651748549078 } from "./migrations/1651748549078-addEventConditionAndEventAction";
 import { updateInfoField1651774264695 } from "./migrations/1651774264695-updateInfoField";
 import { updateInfoField1651774832122 } from "./migrations/1651774832122-updateInfoField";
+import { addTargetToEvent1651788911054 } from "./migrations/1651788911054-addTargetToEvent";
 
 const dataSource = new DataSource({
   type: "postgres",
@@ -44,6 +45,7 @@ const dataSource = new DataSource({
     addEventConditionAndEventAction1651748549078,
     updateInfoField1651774264695,
     updateInfoField1651774832122,
+    addTargetToEvent1651788911054,
   ],
 });
 
