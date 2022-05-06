@@ -42,7 +42,7 @@ export class WorkflowAction extends Base<WorkflowAction> {
     length: 1024,
     transformer: {
       to: (value: string[]) => value.join(),
-      from: (value: string | null) => value?.split(",") || [],
+      from: (value: string | null) => (value ? value.split(",") : []),
     },
   })
   components: string[];
