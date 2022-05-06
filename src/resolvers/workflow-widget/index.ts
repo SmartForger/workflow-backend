@@ -33,7 +33,7 @@ export class WorkflowWidgetResolver {
   @Mutation(() => WorkflowWidget, { nullable: true })
   async updateWorkflowWidget(
     @Arg("widgetInput")
-    { id, ...details }: WorkflowWidgetUpdateInput,
+    { id, stepId, ...details }: WorkflowWidgetUpdateInput,
     @Repo(WorkflowWidget) repository: Repository<WorkflowWidget>
   ): Promise<WorkflowWidget | null> {
     const widget = await repository.findOneBy({ id });
@@ -44,8 +44,8 @@ export class WorkflowWidgetResolver {
 
     Object.assign(widget, details);
 
-    if (details.stepId && widget.step.id !== details.stepId) {
-      widget.step = new WorkflowStep({ id: details.stepId });
+    if (stepId) {
+      widget.step = new WorkflowStep({ id: stepId });
     }
 
     await repository.save(widget);

@@ -26,7 +26,7 @@ export class WorkflowStepResolver {
   @Mutation(() => WorkflowStep, { nullable: true })
   async updateWorkflowStep(
     @Arg("stepInput")
-    { id, ...details }: WorkflowStepUpdateInput,
+    { id, workflowId, ...details }: WorkflowStepUpdateInput,
     @Repo(WorkflowStep) repository: Repository<WorkflowStep>
   ): Promise<WorkflowStep | null> {
     const step = await repository.findOneBy({ id });
@@ -37,8 +37,8 @@ export class WorkflowStepResolver {
 
     Object.assign(step, details);
 
-    if (details.workflowId && step.workflow.id !== details.workflowId) {
-      step.workflow = new Workflow({ id: details.workflowId });
+    if (workflowId) {
+      step.workflow = new Workflow({ id: workflowId });
     }
 
     await repository.save(step);

@@ -26,7 +26,7 @@ export class WorkflowLayoutResolver {
   @Mutation(() => WorkflowLayout, { nullable: true })
   async updateWorkflowLayout(
     @Arg("layoutInput")
-    { id, ...details }: WorkflowLayoutUpdateInput,
+    { id, stepId, ...details }: WorkflowLayoutUpdateInput,
     @Repo(WorkflowLayout) repository: Repository<WorkflowLayout>
   ): Promise<WorkflowLayout | null> {
     const layout = await repository.findOneBy({ id });
@@ -37,8 +37,8 @@ export class WorkflowLayoutResolver {
 
     Object.assign(layout, details);
 
-    if (details.stepId && layout.step.id !== details.stepId) {
-      layout.step = new WorkflowStep({ id: details.stepId });
+    if (stepId) {
+      layout.step = new WorkflowStep({ id: stepId });
     }
 
     await repository.save(layout);
