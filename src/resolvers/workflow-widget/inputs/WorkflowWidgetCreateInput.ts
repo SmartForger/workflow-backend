@@ -7,7 +7,7 @@ export class WorkflowWidgetCreateInput implements Partial<WorkflowWidget> {
   type: string;
 
   @Field()
-  displayName: string;
+  name: string;
 
   @Field()
   description: string;

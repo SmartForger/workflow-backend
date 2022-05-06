@@ -20,10 +20,6 @@ export class WorkflowStep extends Base<WorkflowStep> {
 
   @Field()
   @Column()
-  displayName: string;
-
-  @Field()
-  @Column()
   description: string;
 
   @Field()

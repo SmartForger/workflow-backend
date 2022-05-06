@@ -10,7 +10,7 @@ export class WorkflowWidgetUpdateInput implements Partial<WorkflowWidget> {
   type: string;
 
   @Field({ nullable: true })
-  displayName: string;
+  name: string;
 
   @Field({ nullable: true })
   description: string;

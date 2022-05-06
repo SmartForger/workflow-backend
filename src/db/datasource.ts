@@ -17,6 +17,7 @@ import { addEventConditionAndEventAction1651748549078 } from "./migrations/16517
 import { updateInfoField1651774264695 } from "./migrations/1651774264695-updateInfoField";
 import { updateInfoField1651774832122 } from "./migrations/1651774832122-updateInfoField";
 import { addTargetToEvent1651788911054 } from "./migrations/1651788911054-addTargetToEvent";
+import { removeDisplayNames1651792020694 } from "./migrations/1651792020694-removeDisplayNames";
 
 const dataSource = new DataSource({
   type: "postgres",
@@ -46,6 +47,7 @@ const dataSource = new DataSource({
     updateInfoField1651774264695,
     updateInfoField1651774832122,
     addTargetToEvent1651788911054,
+    removeDisplayNames1651792020694,
   ],
 });
 

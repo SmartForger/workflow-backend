@@ -7,9 +7,6 @@ export class WorkflowStepCreateInput implements Partial<WorkflowStep> {
   name: string;
 
   @Field()
-  displayName: string;
-
-  @Field()
   description: string;
 
   @Field()

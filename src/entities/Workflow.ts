@@ -1,6 +1,6 @@
 import { Field, ID, ObjectType } from "type-graphql";
 import { TypeormLoader } from "type-graphql-dataloader";
-import { Entity, PrimaryColumn, Column, ManyToOne, OneToMany } from "typeorm";
+import { Entity, PrimaryColumn, Column, OneToMany } from "typeorm";
 import { Base } from "../types/Base";
 import { WorkflowStep } from "./WorkflowStep";
 
@@ -22,10 +22,6 @@ export class Workflow extends Base<Workflow> {
   @Field()
   @Column()
   name: string;
-
-  @Field()
-  @Column()
-  displayName: string;
 
   @Field()
   @Column()

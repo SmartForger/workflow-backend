@@ -10,9 +10,6 @@ export class WorkflowStepUpdateInput implements Partial<WorkflowStep> {
   name: string;
 
   @Field({ nullable: true })
-  displayName: string;
-
-  @Field({ nullable: true })
   description: string;
 
   @Field({ nullable: true })

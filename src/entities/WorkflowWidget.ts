@@ -18,7 +18,7 @@ export class WorkflowWidget extends Base<WorkflowWidget> {
 
   @Field()
   @Column()
-  displayName: string;
+  name: string;
 
   @Field()
   @Column()

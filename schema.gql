@@ -53,7 +53,6 @@ type SignedURL {
 type Workflow {
   category: String!
   description: String!
-  displayName: String!
   icon: String!
   iconFileName: String!
   id: ID!
@@ -93,7 +92,6 @@ input WorkflowActionUpdateInput {
 input WorkflowCreateInput {
   category: String!
   description: String!
-  displayName: String!
   icon: String!
   iconFileName: String!
   mode: [String!]!
@@ -198,7 +196,6 @@ input WorkflowLayoutUpdateInput {
 
 type WorkflowStep {
   description: String!
-  displayName: String!
   events: [WorkflowEvent!]!
   icon: String!
   iconFileName: String!
@@ -211,7 +208,6 @@ type WorkflowStep {
 
 input WorkflowStepCreateInput {
   description: String!
-  displayName: String!
   icon: String!
   iconFileName: String!
   name: String!
@@ -220,7 +216,6 @@ input WorkflowStepCreateInput {
 
 input WorkflowStepUpdateInput {
   description: String
-  displayName: String
   icon: String
   iconFileName: String
   id: String!
@@ -231,7 +226,6 @@ input WorkflowStepUpdateInput {
 input WorkflowUpdateInput {
   category: String
   description: String
-  displayName: String
   icon: String
   iconFileName: String
   id: String!
@@ -242,12 +236,12 @@ input WorkflowUpdateInput {
 
 type WorkflowWidget {
   description: String!
-  displayName: String!
   field: String!
   icon: String!
   iconFileName: String!
   id: ID!
   layout: WorkflowLayout!
+  name: String!
   step: WorkflowStep!
   type: String!
   updateEvent: String!
@@ -255,11 +249,11 @@ type WorkflowWidget {
 
 input WorkflowWidgetCreateInput {
   description: String!
-  displayName: String!
   field: String!
   icon: String!
   iconFileName: String!
   layoutId: String
+  name: String!
   stepId: String
   type: String!
   updateEvent: String!
@@ -267,12 +261,12 @@ input WorkflowWidgetCreateInput {
 
 input WorkflowWidgetUpdateInput {
   description: String
-  displayName: String
   field: String
   icon: String
   iconFileName: String
   id: String!
   layoutId: String
+  name: String
   stepId: String
   type: String
   updateEvent: String

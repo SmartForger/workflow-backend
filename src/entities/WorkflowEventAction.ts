@@ -1,12 +1,6 @@
 import { Field, ID, ObjectType } from "type-graphql";
 import { TypeormLoader } from "type-graphql-dataloader";
-import {
-  Entity,
-  PrimaryColumn,
-  ManyToOne,
-  OneToOne,
-  JoinColumn,
-} from "typeorm";
+import { Entity, PrimaryColumn, ManyToOne } from "typeorm";
 import { Base } from "../types/Base";
 import { WorkflowAction } from "./WorkflowAction";
 import { WorkflowEvent } from "./WorkflowEvent";
