@@ -43,5 +43,5 @@ export class WorkflowAction extends Base<WorkflowAction> {
       from: (value: string | null) => value?.split(",") || [],
     },
   })
-  categories: string[];
+  components: string[];
 }

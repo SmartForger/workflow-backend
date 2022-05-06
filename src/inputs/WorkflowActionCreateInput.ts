@@ -16,5 +16,5 @@ export class WorkflowActionCreateInput implements Partial<WorkflowAction> {
   content: string;
 
   @Field(() => [String])
-  categories: string[];
+  components: string[];
 }

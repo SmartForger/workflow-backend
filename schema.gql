@@ -58,8 +58,8 @@ type Workflow {
 }
 
 type WorkflowAction {
-  categories: [String!]!
   code: String!
+  components: [String!]!
   content: String!
   id: ID!
   name: String!
@@ -67,16 +67,16 @@ type WorkflowAction {
 }
 
 input WorkflowActionCreateInput {
-  categories: [String!]!
   code: String!
+  components: [String!]!
   content: String!
   name: String!
   type: String!
 }
 
 input WorkflowActionUpdateInput {
-  categories: [String!]
   code: String
+  components: [String!]
   content: String
   id: String!
   name: String

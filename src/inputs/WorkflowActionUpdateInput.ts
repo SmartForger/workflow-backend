@@ -19,5 +19,5 @@ export class WorkflowActionUpdateInput implements Partial<WorkflowAction> {
   content: string;
 
   @Field(() => [String], { nullable: true })
-  categories: string[];
+  components: string[];
 }
