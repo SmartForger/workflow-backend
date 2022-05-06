@@ -10,11 +10,5 @@ export class WorkflowEventCreateInput implements Partial<WorkflowEvent> {
   description: string;
 
   @Field()
-  action: string;
-
-  @Field()
-  condition: string;
-
-  @Field()
   stepId: string;
 }

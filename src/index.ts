@@ -12,6 +12,8 @@ import { WorkflowWidgetResolver } from "./resolvers/workflow-widget";
 import { WorkflowLayoutResolver } from "./resolvers/workflow-layout";
 import { CloudStorageResolver } from "./resolvers/cloud-storage";
 import { WorkflowActionResolver } from "./resolvers/workflow-action";
+import { WorkflowEventActionResolver } from "./resolvers/workflow-event-action";
+import { WorkflowEventConditionResolver } from "./resolvers/workflow-event-condition";
 
 async function main() {
   const schema = await buildSchema({
@@ -23,6 +25,8 @@ async function main() {
       WorkflowLayoutResolver,
       CloudStorageResolver,
       WorkflowActionResolver,
+      WorkflowEventActionResolver,
+      WorkflowEventConditionResolver,
     ],
     emitSchemaFile: true,
   });

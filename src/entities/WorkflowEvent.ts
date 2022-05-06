@@ -1,7 +1,9 @@
 import { Field, ID, ObjectType } from "type-graphql";
 import { TypeormLoader } from "type-graphql-dataloader";
-import { Entity, PrimaryColumn, Column, ManyToOne } from "typeorm";
+import { Entity, PrimaryColumn, Column, ManyToOne, OneToMany } from "typeorm";
 import { Base } from "../types/Base";
+import { WorkflowEventAction } from "./WorkflowEventAction";
+import { WorkflowEventCondition } from "./WorkflowEventCondition";
 import { WorkflowStep } from "./WorkflowStep";
 
 @ObjectType()
@@ -19,16 +21,18 @@ export class WorkflowEvent extends Base<WorkflowEvent> {
   @Column()
   description: string;
 
-  @Field()
-  @Column()
-  action: string;
-
-  @Field()
-  @Column()
-  condition: string;
-
   @Field(() => WorkflowStep)
   @ManyToOne(() => WorkflowStep, (step) => step.events, { onDelete: "CASCADE" })
   @TypeormLoader()
   step: WorkflowStep;
+
+  @Field(() => [WorkflowEventCondition])
+  @OneToMany(() => WorkflowEventCondition, (condition) => condition.event)
+  @TypeormLoader()
+  conditions: WorkflowEventCondition[];
+
+  @Field(() => [WorkflowEventAction])
+  @OneToMany(() => WorkflowEventAction, (action) => action.event)
+  @TypeormLoader()
+  actions: WorkflowEventAction[];
 }

@@ -1,8 +1,7 @@
 import { Field, InputType } from "type-graphql";
-import { WorkflowEvent } from "../../../entities/WorkflowEvent";
 
 @InputType()
-export class WorkflowEventUpdateInput implements Partial<WorkflowEvent> {
+export class WorkflowEventConditionUpdateInput {
   @Field()
   id: string;
 
@@ -10,8 +9,8 @@ export class WorkflowEventUpdateInput implements Partial<WorkflowEvent> {
   name: string;
 
   @Field({ nullable: true })
-  description: string;
+  filterJson: string;
 
   @Field({ nullable: true })
-  stepId: string;
+  eventId: string;
 }

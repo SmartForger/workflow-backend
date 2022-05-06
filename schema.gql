@@ -14,18 +14,24 @@ type Mutation {
   createWorkflow(workflowInput: WorkflowCreateInput!): Workflow!
   createWorkflowAction(workflowActionInput: WorkflowActionCreateInput!): WorkflowAction!
   createWorkflowEvent(eventInput: WorkflowEventCreateInput!): WorkflowEvent!
+  createWorkflowEventAction(input: WorkflowEventActionCreateInput!): WorkflowEventAction!
+  createWorkflowEventCondition(input: WorkflowEventConditionCreateInput!): WorkflowEventCondition!
   createWorkflowLayout(layoutInput: WorkflowLayoutCreateInput!): WorkflowLayout!
   createWorkflowStep(stepInput: WorkflowStepCreateInput!): WorkflowStep!
   createWorkflowWidget(widgetInput: WorkflowWidgetCreateInput!): WorkflowWidget!
   deleteWorkflow(id: String!): Workflow
   deleteWorkflowAction(id: String!): WorkflowAction
   deleteWorkflowEvent(id: String!): WorkflowEvent
+  deleteWorkflowEventAction(id: String!): WorkflowEventAction
+  deleteWorkflowEventCondition(id: String!): WorkflowEventCondition
   deleteWorkflowLayout(id: String!): WorkflowLayout
   deleteWorkflowStep(id: String!): WorkflowStep
   deleteWorkflowWidget(id: String!): WorkflowWidget
   updateWorkflow(workflowInput: WorkflowUpdateInput!): Workflow
   updateWorkflowAction(workflowActionInput: WorkflowActionUpdateInput!): WorkflowAction
   updateWorkflowEvent(eventInput: WorkflowEventUpdateInput!): WorkflowEvent
+  updateWorkflowEventAction(input: WorkflowEventActionUpdateInput!): WorkflowEventAction
+  updateWorkflowEventCondition(input: WorkflowEventConditionUpdateInput!): WorkflowEventCondition
   updateWorkflowLayout(layoutInput: WorkflowLayoutUpdateInput!): WorkflowLayout
   updateWorkflowStep(stepInput: WorkflowStepUpdateInput!): WorkflowStep
   updateWorkflowWidget(widgetInput: WorkflowWidgetUpdateInput!): WorkflowWidget
@@ -61,6 +67,7 @@ type WorkflowAction {
   code: String!
   components: [String!]!
   content: String!
+  eventActions: [WorkflowEventAction!]!
   id: ID!
   name: String!
   type: String!
@@ -95,25 +102,58 @@ input WorkflowCreateInput {
 }
 
 type WorkflowEvent {
-  action: String!
-  condition: String!
+  actions: [WorkflowEventAction!]!
+  conditions: [WorkflowEventCondition!]!
   description: String!
   id: ID!
   name: String!
   step: WorkflowStep!
 }
 
+type WorkflowEventAction {
+  event: WorkflowEvent!
+  id: ID!
+  info: WorkflowAction!
+}
+
+input WorkflowEventActionCreateInput {
+  actionId: String!
+  eventId: String!
+}
+
+input WorkflowEventActionUpdateInput {
+  actionId: String
+  eventId: String
+  id: String!
+}
+
+type WorkflowEventCondition {
+  event: WorkflowEvent!
+  filterJson: String!
+  id: ID!
+  name: String!
+}
+
+input WorkflowEventConditionCreateInput {
+  eventId: String!
+  filterJson: String!
+  name: String!
+}
+
+input WorkflowEventConditionUpdateInput {
+  eventId: String
+  filterJson: String
+  id: String!
+  name: String
+}
+
 input WorkflowEventCreateInput {
-  action: String!
-  condition: String!
   description: String!
   name: String!
   stepId: String!
 }
 
 input WorkflowEventUpdateInput {
-  action: String
-  condition: String
   description: String
   id: String!
   name: String

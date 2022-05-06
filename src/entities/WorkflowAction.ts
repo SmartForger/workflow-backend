@@ -1,6 +1,8 @@
 import { Field, ID, ObjectType } from "type-graphql";
-import { Entity, PrimaryColumn, Column } from "typeorm";
+import { TypeormLoader } from "type-graphql-dataloader";
+import { Entity, PrimaryColumn, Column, OneToMany } from "typeorm";
 import { Base } from "../types/Base";
+import { WorkflowEventAction } from "./WorkflowEventAction";
 
 export enum WorkflowActionType {
   TRANSACTION = "transaction",
@@ -44,4 +46,9 @@ export class WorkflowAction extends Base<WorkflowAction> {
     },
   })
   components: string[];
+
+  @Field(() => [WorkflowEventAction])
+  @OneToMany(() => WorkflowEventAction, (eventAction) => eventAction.info)
+  @TypeormLoader()
+  eventActions: WorkflowEventAction[];
 }
