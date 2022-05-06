@@ -2,6 +2,7 @@ import { Field, ID, ObjectType } from "type-graphql";
 import { TypeormLoader } from "type-graphql-dataloader";
 import { Entity, PrimaryColumn, Column, OneToMany } from "typeorm";
 import { Base } from "../types/Base";
+import { Lazy } from "../types/Lazy";
 import { WorkflowStep } from "./WorkflowStep";
 
 @ObjectType()
@@ -47,7 +48,7 @@ export class Workflow extends Base<Workflow> {
   iconFileName: string;
 
   @Field(() => [WorkflowStep])
-  @OneToMany(() => WorkflowStep, (step) => step.workflow)
+  @OneToMany(() => WorkflowStep, (step) => step.workflow, { lazy: true })
   @TypeormLoader()
-  steps: WorkflowStep[];
+  steps: Lazy<WorkflowStep[]>;
 }

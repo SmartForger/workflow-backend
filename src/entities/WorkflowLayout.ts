@@ -2,6 +2,7 @@ import { Field, ID, ObjectType } from "type-graphql";
 import { TypeormLoader } from "type-graphql-dataloader";
 import { Entity, PrimaryColumn, Column, ManyToOne, OneToMany } from "typeorm";
 import { Base } from "../types/Base";
+import { Lazy } from "../types/Lazy";
 import { WorkflowStep } from "./WorkflowStep";
 import { WorkflowWidget } from "./WorkflowWidget";
 
@@ -37,12 +38,14 @@ export class WorkflowLayout extends Base<WorkflowLayout> {
   visible: boolean;
 
   @Field(() => WorkflowStep)
-  @ManyToOne(() => WorkflowStep, (step) => step.events, { onDelete: 'CASCADE' })
-  @TypeormLoader()
-  step: WorkflowStep;
+  @ManyToOne(() => WorkflowStep, (step) => step.layouts, {
+    lazy: true,
+    onDelete: "CASCADE",
+  })
+  step: Lazy<WorkflowStep>;
 
   @Field(() => [WorkflowWidget])
-  @OneToMany(() => WorkflowWidget, (widget) => widget.layout)
+  @OneToMany(() => WorkflowWidget, (widget) => widget.layout, { lazy: true })
   @TypeormLoader()
-  widgets: WorkflowWidget[];
+  widgets: Lazy<WorkflowWidget[]>;
 }

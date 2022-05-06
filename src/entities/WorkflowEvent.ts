@@ -1,15 +1,8 @@
 import { Field, ID, ObjectType } from "type-graphql";
 import { TypeormLoader } from "type-graphql-dataloader";
-import {
-  Entity,
-  PrimaryColumn,
-  Column,
-  ManyToOne,
-  OneToMany,
-  OneToOne,
-  JoinColumn,
-} from "typeorm";
+import { Entity, PrimaryColumn, Column, ManyToOne, OneToMany } from "typeorm";
 import { Base } from "../types/Base";
+import { Lazy } from "../types/Lazy";
 import { WorkflowEventAction } from "./WorkflowEventAction";
 import { WorkflowEventCondition } from "./WorkflowEventCondition";
 import { WorkflowStep } from "./WorkflowStep";
@@ -30,22 +23,32 @@ export class WorkflowEvent extends Base<WorkflowEvent> {
   description: string;
 
   @Field(() => WorkflowStep, { nullable: true })
-  @OneToOne(() => WorkflowStep, { nullable: true })
-  @JoinColumn()
-  target: WorkflowStep | null;
+  @ManyToOne(() => WorkflowStep, (action) => action.targetedEvents, {
+    lazy: true,
+    nullable: true,
+    onDelete: "SET NULL",
+  })
+  @TypeormLoader()
+  target: Lazy<WorkflowStep | null>;
 
   @Field(() => WorkflowStep)
-  @ManyToOne(() => WorkflowStep, (step) => step.events, { onDelete: "CASCADE" })
-  @TypeormLoader()
-  step: WorkflowStep;
+  @ManyToOne(() => WorkflowStep, (step) => step.events, {
+    lazy: true,
+    onDelete: "CASCADE",
+  })
+  step: Lazy<WorkflowStep>;
 
   @Field(() => [WorkflowEventCondition])
-  @OneToMany(() => WorkflowEventCondition, (condition) => condition.event)
+  @OneToMany(() => WorkflowEventCondition, (condition) => condition.event, {
+    lazy: true,
+  })
   @TypeormLoader()
-  conditions: WorkflowEventCondition[];
+  conditions: Lazy<WorkflowEventCondition[]>;
 
   @Field(() => [WorkflowEventAction])
-  @OneToMany(() => WorkflowEventAction, (action) => action.event)
+  @OneToMany(() => WorkflowEventAction, (action) => action.event, {
+    lazy: true,
+  })
   @TypeormLoader()
-  actions: WorkflowEventAction[];
+  actions: Lazy<WorkflowEventAction[]>;
 }

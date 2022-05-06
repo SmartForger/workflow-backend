@@ -1,7 +1,7 @@
 import { Field, ID, ObjectType } from "type-graphql";
-import { TypeormLoader } from "type-graphql-dataloader";
 import { Entity, PrimaryColumn, Column, ManyToOne } from "typeorm";
 import { Base } from "../types/Base";
+import { Lazy } from "../types/Lazy";
 import { WorkflowEvent } from "./WorkflowEvent";
 
 @ObjectType()
@@ -22,7 +22,7 @@ export class WorkflowEventCondition extends Base<WorkflowEventCondition> {
   @Field(() => WorkflowEvent)
   @ManyToOne(() => WorkflowEvent, (event) => event.conditions, {
     onDelete: "CASCADE",
+    lazy: true,
   })
-  @TypeormLoader()
-  event: WorkflowEvent;
+  event: Lazy<WorkflowEvent>;
 }

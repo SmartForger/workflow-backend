@@ -112,7 +112,7 @@ type WorkflowEvent {
 type WorkflowEventAction {
   event: WorkflowEvent!
   id: ID!
-  info: WorkflowAction!
+  info: WorkflowAction
 }
 
 input WorkflowEventActionCreateInput {
@@ -202,6 +202,7 @@ type WorkflowStep {
   id: ID!
   layouts: [WorkflowLayout!]!
   name: String!
+  targetedEvents: [WorkflowEvent!]!
   widgets: [WorkflowWidget!]!
   workflow: Workflow!
 }
