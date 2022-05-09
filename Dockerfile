@@ -9,6 +9,4 @@ RUN npm install --only=production
 COPY . ./
 COPY --from=us-docker.pkg.dev/berglas/berglas/berglas:latest /bin/berglas /bin/berglas
 
-RUN ./scripts/migrate.sh
-
 ENTRYPOINT exec /bin/berglas exec -- npm start

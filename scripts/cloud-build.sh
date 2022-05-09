@@ -10,4 +10,6 @@ then
   exit
 fi
 
-gcloud app deploy --project ${PROJECT_ID} --image-url gcr.io/${PROJECT_ID}/prodeo-backend:${VERSION}
+npm run build
+gcloud builds submit --project ${PROJECT_ID} --tag gcr.io/${PROJECT_ID}/prodeo-backend:${VERSION} .
+npm run migration:run

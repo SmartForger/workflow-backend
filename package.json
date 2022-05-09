@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc",
+    "cloud:build": "./scripts/cloud-build.sh",
     "deploy": "./scripts/deploy.sh",
     "dev": "nodemon --exec ts-node src/index.ts",
     "migration:generate": "npm run typeorm migration:generate -- -d src/db/datasource.ts ",
