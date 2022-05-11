@@ -11,6 +11,7 @@ import { WorkflowEventAction } from "../entities/WorkflowEventAction";
 import { WorkflowEventCondition } from "../entities/WorkflowEventCondition";
 
 import { initialMigration1652127476241 } from "./migrations/1652127476241-initialMigration";
+import { addLayoutType1652294337088 } from "./migrations/1652294337088-addLayoutType";
 
 const dataSource = new DataSource({
   type: "postgres",
@@ -32,7 +33,7 @@ const dataSource = new DataSource({
     WorkflowEventCondition,
   ],
   subscribers: [],
-  migrations: [initialMigration1652127476241],
+  migrations: [initialMigration1652127476241, addLayoutType1652294337088],
 });
 
 export default dataSource;

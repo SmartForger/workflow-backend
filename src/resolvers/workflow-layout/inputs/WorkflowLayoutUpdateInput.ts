@@ -1,5 +1,8 @@
 import { Field, InputType } from "type-graphql";
-import { WorkflowLayout } from "../../../entities/WorkflowLayout";
+import {
+  WorkflowLayout,
+  WorkflowLayoutType,
+} from "../../../entities/WorkflowLayout";
 
 @InputType()
 export class WorkflowLayoutUpdateInput implements Partial<WorkflowLayout> {
@@ -8,6 +11,9 @@ export class WorkflowLayoutUpdateInput implements Partial<WorkflowLayout> {
 
   @Field({ nullable: true })
   title: string;
+
+  @Field({ nullable: true })
+  type: WorkflowLayoutType;
 
   @Field({ nullable: true })
   icon: string;

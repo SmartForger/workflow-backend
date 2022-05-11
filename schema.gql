@@ -169,6 +169,7 @@ type WorkflowLayout {
   step: WorkflowStep!
   textColor: String!
   title: String!
+  type: String!
   visible: Boolean!
   widgets: [WorkflowWidget!]!
 }
@@ -180,6 +181,7 @@ input WorkflowLayoutCreateInput {
   stepId: String!
   textColor: String!
   title: String!
+  type: String!
   visible: Boolean!
 }
 
@@ -191,6 +193,7 @@ input WorkflowLayoutUpdateInput {
   stepId: String
   textColor: String
   title: String
+  type: String
   visible: Boolean
 }
 

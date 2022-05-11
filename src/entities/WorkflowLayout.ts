@@ -6,6 +6,11 @@ import { Lazy } from "../types/Lazy";
 import { WorkflowStep } from "./WorkflowStep";
 import { WorkflowWidget } from "./WorkflowWidget";
 
+export enum WorkflowLayoutType {
+  HEADER = "header",
+  FOOTER = "footer",
+}
+
 @ObjectType()
 @Entity()
 export class WorkflowLayout extends Base<WorkflowLayout> {
@@ -36,6 +41,14 @@ export class WorkflowLayout extends Base<WorkflowLayout> {
   @Field()
   @Column()
   visible: boolean;
+
+  @Field()
+  @Column({
+    type: "enum",
+    enum: WorkflowLayoutType,
+    default: WorkflowLayoutType.HEADER,
+  })
+  type: WorkflowLayoutType;
 
   @Field(() => WorkflowStep)
   @ManyToOne(() => WorkflowStep, (step) => step.layouts, {
