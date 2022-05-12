@@ -18,8 +18,8 @@ export class WorkflowEvent extends Base<WorkflowEvent> {
   @Column()
   name: string;
 
-  @Field()
-  @Column()
+  @Field({ nullable: true })
+  @Column({ nullable: true })
   description: string;
 
   @Field(() => WorkflowStep, { nullable: true })

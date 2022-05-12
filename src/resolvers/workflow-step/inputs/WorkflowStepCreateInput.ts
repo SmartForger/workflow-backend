@@ -6,13 +6,13 @@ export class WorkflowStepCreateInput implements Partial<WorkflowStep> {
   @Field()
   name: string;
 
-  @Field()
+  @Field({  nullable: true })
   description: string;
 
-  @Field()
+  @Field({  nullable: true })
   icon: string;
 
-  @Field()
+  @Field({  nullable: true })
   iconFileName: string;
 
   @Field()

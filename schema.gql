@@ -52,11 +52,11 @@ type SignedURL {
 
 type Workflow {
   category: String!
-  description: String!
-  icon: String!
-  iconFileName: String!
+  description: String
+  icon: String
+  iconFileName: String
   id: ID!
-  mode: [String!]!
+  mode: [String!]
   name: String!
   steps: [WorkflowStep!]!
   subCategory: String!
@@ -91,10 +91,10 @@ input WorkflowActionUpdateInput {
 
 input WorkflowCreateInput {
   category: String!
-  description: String!
-  icon: String!
-  iconFileName: String!
-  mode: [String!]!
+  description: String
+  icon: String
+  iconFileName: String
+  mode: [String!]
   name: String!
   subCategory: String!
 }
@@ -102,7 +102,7 @@ input WorkflowCreateInput {
 type WorkflowEvent {
   actions: [WorkflowEventAction!]!
   conditions: [WorkflowEventCondition!]!
-  description: String!
+  description: String
   id: ID!
   name: String!
   step: WorkflowStep!
@@ -147,7 +147,7 @@ input WorkflowEventConditionUpdateInput {
 }
 
 input WorkflowEventCreateInput {
-  description: String!
+  description: String
   name: String!
   stepId: String!
   targetId: String
@@ -162,27 +162,27 @@ input WorkflowEventUpdateInput {
 }
 
 type WorkflowLayout {
-  backgroundColor: String!
-  icon: String!
-  iconFileName: String!
+  backgroundColor: String
+  icon: String
+  iconFileName: String
   id: ID!
+  name: String!
   step: WorkflowStep!
-  textColor: String!
-  title: String!
+  textColor: String
   type: String!
-  visible: Boolean!
+  visible: Boolean
   widgets: [WorkflowWidget!]!
 }
 
 input WorkflowLayoutCreateInput {
-  backgroundColor: String!
-  icon: String!
-  iconFileName: String!
+  backgroundColor: String
+  icon: String
+  iconFileName: String
+  name: String!
   stepId: String!
-  textColor: String!
-  title: String!
+  textColor: String
   type: String!
-  visible: Boolean!
+  visible: Boolean
 }
 
 input WorkflowLayoutUpdateInput {
@@ -190,18 +190,18 @@ input WorkflowLayoutUpdateInput {
   icon: String
   iconFileName: String
   id: String!
+  name: String
   stepId: String
   textColor: String
-  title: String
   type: String
   visible: Boolean
 }
 
 type WorkflowStep {
-  description: String!
+  description: String
   events: [WorkflowEvent!]!
-  icon: String!
-  iconFileName: String!
+  icon: String
+  iconFileName: String
   id: ID!
   layouts: [WorkflowLayout!]!
   name: String!
@@ -211,9 +211,9 @@ type WorkflowStep {
 }
 
 input WorkflowStepCreateInput {
-  description: String!
-  icon: String!
-  iconFileName: String!
+  description: String
+  icon: String
+  iconFileName: String
   name: String!
   workflowId: String!
 }
@@ -239,32 +239,33 @@ input WorkflowUpdateInput {
 }
 
 type WorkflowWidget {
-  description: String!
-  field: String!
-  icon: String!
-  iconFileName: String!
+  description: String
+  event: String
+  field: String
+  icon: String
+  iconFileName: String
   id: ID!
   layout: WorkflowLayout!
   name: String!
   step: WorkflowStep!
   type: String!
-  updateEvent: String!
 }
 
 input WorkflowWidgetCreateInput {
-  description: String!
-  field: String!
-  icon: String!
-  iconFileName: String!
+  description: String
+  event: String
+  field: String
+  icon: String
+  iconFileName: String
   layoutId: String
   name: String!
   stepId: String
   type: String!
-  updateEvent: String!
 }
 
 input WorkflowWidgetUpdateInput {
   description: String
+  event: String
   field: String
   icon: String
   iconFileName: String
@@ -273,5 +274,4 @@ input WorkflowWidgetUpdateInput {
   name: String
   stepId: String
   type: String
-  updateEvent: String
 }

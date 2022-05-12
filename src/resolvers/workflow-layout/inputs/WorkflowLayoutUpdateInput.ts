@@ -10,7 +10,7 @@ export class WorkflowLayoutUpdateInput implements Partial<WorkflowLayout> {
   id: string;
 
   @Field({ nullable: true })
-  title: string;
+  name: string;
 
   @Field({ nullable: true })
   type: WorkflowLayoutType;

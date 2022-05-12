@@ -7,24 +7,24 @@ import {
 @InputType()
 export class WorkflowLayoutCreateInput implements Partial<WorkflowLayout> {
   @Field()
-  title: string;
-
-  @Field()
-  icon: string;
+  name: string;
 
   @Field()
   type: WorkflowLayoutType;
 
-  @Field()
+  @Field({ nullable: true })
+  icon: string;
+
+  @Field({ nullable: true })
   iconFileName: string;
 
-  @Field()
+  @Field({ nullable: true })
   backgroundColor: string;
 
-  @Field()
+  @Field({ nullable: true })
   textColor: string;
 
-  @Field()
+  @Field({ nullable: true })
   visible: boolean;
 
   @Field()

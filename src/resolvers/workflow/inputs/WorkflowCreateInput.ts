@@ -12,15 +12,15 @@ export class WorkflowCreateInput implements Partial<Workflow> {
   @Field()
   name: string;
 
-  @Field()
+  @Field({ nullable: true })
   description: string;
 
-  @Field(() => [String])
+  @Field(() => [String], { nullable: true })
   mode: string[];
 
-  @Field()
+  @Field({ nullable: true })
   icon: string;
 
-  @Field()
+  @Field({ nullable: true })
   iconFileName: string;
 }

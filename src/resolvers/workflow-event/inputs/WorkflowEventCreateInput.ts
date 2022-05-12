@@ -6,7 +6,7 @@ export class WorkflowEventCreateInput implements Partial<WorkflowEvent> {
   @Field()
   name: string;
 
-  @Field()
+  @Field({ nullable: true })
   description: string;
 
   @Field({ nullable: true })

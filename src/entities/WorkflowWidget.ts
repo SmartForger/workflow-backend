@@ -20,25 +20,25 @@ export class WorkflowWidget extends Base<WorkflowWidget> {
   @Column()
   name: string;
 
-  @Field()
-  @Column()
+  @Field({ nullable: true })
+  @Column({ nullable: true })
   description: string;
 
-  @Field()
-  @Column()
+  @Field({ nullable: true })
+  @Column({ nullable: true })
   icon: string;
 
-  @Field()
-  @Column()
+  @Field({ nullable: true })
+  @Column({ nullable: true })
   iconFileName: string;
 
-  @Field()
-  @Column()
+  @Field({ nullable: true })
+  @Column({ nullable: true })
   field: string;
 
-  @Field()
-  @Column()
-  updateEvent: string;
+  @Field({ nullable: true })
+  @Column({ nullable: true })
+  event: string;
 
   @Field(() => WorkflowStep)
   @ManyToOne(() => WorkflowStep, (step) => step.events, {

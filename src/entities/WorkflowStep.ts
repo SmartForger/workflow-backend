@@ -19,16 +19,16 @@ export class WorkflowStep extends Base<WorkflowStep> {
   @Column()
   name: string;
 
-  @Field()
-  @Column()
+  @Field({  nullable: true })
+  @Column({  nullable: true })
   description: string;
 
-  @Field()
-  @Column()
+  @Field({  nullable: true })
+  @Column({  nullable: true })
   icon: string;
 
-  @Field()
-  @Column()
+  @Field({  nullable: true })
+  @Column({  nullable: true })
   iconFileName: string;
 
   @Field(() => Workflow)

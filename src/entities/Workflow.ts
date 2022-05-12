@@ -24,27 +24,28 @@ export class Workflow extends Base<Workflow> {
   @Column()
   name: string;
 
-  @Field()
-  @Column()
+  @Field({ nullable: true })
+  @Column({ nullable: true })
   description: string;
 
-  @Field(() => [String])
+  @Field(() => [String], { nullable: true })
   @Column({
     type: "varchar",
     length: 1024,
     transformer: {
-      to: (value: string[]) => value.join(),
+      to: (value: string[] | null | undefined) => value ? value.join() : null,
       from: (value: string | null) => (value ? value.split(",") : []),
     },
+    nullable: true,
   })
   mode: string[];
 
-  @Field()
-  @Column()
+  @Field({ nullable: true })
+  @Column({ nullable: true })
   icon: string;
 
-  @Field()
-  @Column()
+  @Field({ nullable: true })
+  @Column({ nullable: true })
   iconFileName: string;
 
   @Field(() => [WorkflowStep])

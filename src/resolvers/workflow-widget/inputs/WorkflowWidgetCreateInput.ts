@@ -9,20 +9,20 @@ export class WorkflowWidgetCreateInput implements Partial<WorkflowWidget> {
   @Field()
   name: string;
 
-  @Field()
+  @Field({ nullable: true })
   description: string;
 
-  @Field()
+  @Field({ nullable: true })
   icon: string;
 
-  @Field()
+  @Field({ nullable: true })
   iconFileName: string;
 
-  @Field()
+  @Field({ nullable: true })
   field: string;
 
-  @Field()
-  updateEvent: string;
+  @Field({ nullable: true })
+  event: string;
 
   @Field({ nullable: true })
   stepId: string;

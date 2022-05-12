@@ -12,6 +12,11 @@ import { WorkflowEventCondition } from "../entities/WorkflowEventCondition";
 
 import { initialMigration1652127476241 } from "./migrations/1652127476241-initialMigration";
 import { addLayoutType1652294337088 } from "./migrations/1652294337088-addLayoutType";
+import { updateWorkflow1652351816632 } from "./migrations/1652351816632-updateWorkflow";
+import { updateWorkflowStep1652352528267 } from "./migrations/1652352528267-updateWorkflowStep";
+import { updateWorkflowEvent1652353327927 } from "./migrations/1652353327927-updateWorkflowEvent";
+import { updateWorkflowLayout1652355753221 } from "./migrations/1652355753221-updateWorkflowLayout";
+import { updateWorkflowWidget1652356454750 } from "./migrations/1652356454750-updateWorkflowWidget";
 
 const dataSource = new DataSource({
   type: "postgres",
@@ -33,7 +38,15 @@ const dataSource = new DataSource({
     WorkflowEventCondition,
   ],
   subscribers: [],
-  migrations: [initialMigration1652127476241, addLayoutType1652294337088],
+  migrations: [
+    initialMigration1652127476241,
+    addLayoutType1652294337088,
+    updateWorkflow1652351816632,
+    updateWorkflowStep1652352528267,
+    updateWorkflowEvent1652353327927,
+    updateWorkflowLayout1652355753221,
+    updateWorkflowWidget1652356454750,
+  ],
 });
 
 export default dataSource;
