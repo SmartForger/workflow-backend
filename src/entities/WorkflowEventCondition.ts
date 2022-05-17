@@ -19,6 +19,10 @@ export class WorkflowEventCondition extends Base<WorkflowEventCondition> {
   @Column()
   filterJson: string;
 
+  @Field({ nullable: true })
+  @Column({ nullable: true })
+  order: number;
+
   @Field(() => WorkflowEvent)
   @ManyToOne(() => WorkflowEvent, (event) => event.conditions, {
     onDelete: "CASCADE",

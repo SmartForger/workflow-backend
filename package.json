@@ -8,9 +8,9 @@
     "cloud:build": "./scripts/cloud-build.sh",
     "deploy": "./scripts/deploy.sh",
     "dev": "nodemon --exec ts-node src/index.ts",
-    "migration:generate": "npm run typeorm migration:generate -- -d src/db/datasource.ts ",
-    "migration:run": "npm run typeorm -- migration:run -d src/db/datasource.ts",
-    "migration:revert": "npm run typeorm -- migration:revert -d src/db/datasource.ts",
+    "mgen": "npm run typeorm migration:generate -- -d src/db/datasource.ts ",
+    "mrun": "npm run typeorm -- migration:run -d src/db/datasource.ts",
+    "mrevert": "npm run typeorm -- migration:revert -d src/db/datasource.ts",
     "start": "node dist/index.js",
     "typeorm": "typeorm-ts-node-esm"
   },

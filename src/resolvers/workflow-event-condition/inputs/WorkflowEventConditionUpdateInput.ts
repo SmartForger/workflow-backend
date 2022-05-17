@@ -1,4 +1,4 @@
-import { Field, InputType } from "type-graphql";
+import { Field, InputType, Int } from "type-graphql";
 
 @InputType()
 export class WorkflowEventConditionUpdateInput {
@@ -6,11 +6,14 @@ export class WorkflowEventConditionUpdateInput {
   id: string;
 
   @Field({ nullable: true })
-  name: string;
+  name?: string;
 
   @Field({ nullable: true })
-  filterJson: string;
+  filterJson?: string;
 
   @Field({ nullable: true })
-  eventId: string;
+  eventId?: string;
+
+  @Field(() => Int, { nullable: true })
+  order?: number;
 }

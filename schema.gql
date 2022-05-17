@@ -31,10 +31,25 @@ type Mutation {
   updateWorkflowAction(workflowActionInput: WorkflowActionUpdateInput!): WorkflowAction
   updateWorkflowEvent(eventInput: WorkflowEventUpdateInput!): WorkflowEvent
   updateWorkflowEventAction(input: WorkflowEventActionUpdateInput!): WorkflowEventAction
+  updateWorkflowEventActionsOrder(orders: [OrderInput!]!): OrderMutationResult
   updateWorkflowEventCondition(input: WorkflowEventConditionUpdateInput!): WorkflowEventCondition
+  updateWorkflowEventConditionsOrder(orders: [OrderInput!]!): OrderMutationResult
+  updateWorkflowEventsOrder(orders: [OrderInput!]!): OrderMutationResult
   updateWorkflowLayout(layoutInput: WorkflowLayoutUpdateInput!): WorkflowLayout
+  updateWorkflowLayoutsOrder(orders: [OrderInput!]!): OrderMutationResult
   updateWorkflowStep(stepInput: WorkflowStepUpdateInput!): WorkflowStep
+  updateWorkflowStepsOrder(orders: [OrderInput!]!): OrderMutationResult
   updateWorkflowWidget(widgetInput: WorkflowWidgetUpdateInput!): WorkflowWidget
+  updateWorkflowWidgetsOrder(orders: [OrderInput!]!): OrderMutationResult
+}
+
+input OrderInput {
+  id: String!
+  order: Int!
+}
+
+type OrderMutationResult {
+  updated: Boolean!
 }
 
 type Query {
@@ -105,6 +120,7 @@ type WorkflowEvent {
   description: String
   id: ID!
   name: String!
+  order: Float
   step: WorkflowStep!
   target: WorkflowStep
 }
@@ -113,17 +129,20 @@ type WorkflowEventAction {
   event: WorkflowEvent!
   id: ID!
   info: WorkflowAction
+  order: Float
 }
 
 input WorkflowEventActionCreateInput {
   actionId: String!
   eventId: String!
+  order: Int
 }
 
 input WorkflowEventActionUpdateInput {
   actionId: String
   eventId: String
   id: String!
+  order: Int
 }
 
 type WorkflowEventCondition {
@@ -131,12 +150,14 @@ type WorkflowEventCondition {
   filterJson: String!
   id: ID!
   name: String!
+  order: Float
 }
 
 input WorkflowEventConditionCreateInput {
   eventId: String!
   filterJson: String!
   name: String!
+  order: Int
 }
 
 input WorkflowEventConditionUpdateInput {
@@ -144,11 +165,13 @@ input WorkflowEventConditionUpdateInput {
   filterJson: String
   id: String!
   name: String
+  order: Int
 }
 
 input WorkflowEventCreateInput {
   description: String
   name: String!
+  order: Int
   stepId: String!
   targetId: String
 }
@@ -157,6 +180,7 @@ input WorkflowEventUpdateInput {
   description: String
   id: String!
   name: String
+  order: Int
   stepId: String
   targetId: String
 }
@@ -167,6 +191,7 @@ type WorkflowLayout {
   iconFileName: String
   id: ID!
   name: String!
+  order: Float
   step: WorkflowStep!
   textColor: String
   type: String!
@@ -179,6 +204,7 @@ input WorkflowLayoutCreateInput {
   icon: String
   iconFileName: String
   name: String!
+  order: Int
   stepId: String!
   textColor: String
   type: String!
@@ -191,6 +217,7 @@ input WorkflowLayoutUpdateInput {
   iconFileName: String
   id: String!
   name: String
+  order: Int
   stepId: String
   textColor: String
   type: String
@@ -205,6 +232,7 @@ type WorkflowStep {
   id: ID!
   layouts: [WorkflowLayout!]!
   name: String!
+  order: Float
   targetedEvents: [WorkflowEvent!]!
   widgets: [WorkflowWidget!]!
   workflow: Workflow!
@@ -215,6 +243,7 @@ input WorkflowStepCreateInput {
   icon: String
   iconFileName: String
   name: String!
+  order: Int
   workflowId: String!
 }
 
@@ -224,6 +253,7 @@ input WorkflowStepUpdateInput {
   iconFileName: String
   id: String!
   name: String
+  order: Int
   workflowId: String
 }
 
@@ -247,6 +277,7 @@ type WorkflowWidget {
   id: ID!
   layout: WorkflowLayout!
   name: String!
+  order: Float
   step: WorkflowStep!
   type: String!
 }
@@ -259,6 +290,7 @@ input WorkflowWidgetCreateInput {
   iconFileName: String
   layoutId: String
   name: String!
+  order: Int
   stepId: String
   type: String!
 }
@@ -272,6 +304,7 @@ input WorkflowWidgetUpdateInput {
   id: String!
   layoutId: String
   name: String
+  order: Int
   stepId: String
   type: String
 }

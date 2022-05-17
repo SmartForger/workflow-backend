@@ -1,6 +1,6 @@
 import { Resolver, Mutation, Arg } from "type-graphql";
 import { Storage } from "@google-cloud/storage";
-import { SignedURL } from "../../entities/SignedURL";
+import { SignedURL } from "../common/types/SignedURL";
 import { CreateSignedURLInput } from "./inputs/CreateSignedURLInput";
 
 const BUCKET_NAME = "prodeo-eureka-files";

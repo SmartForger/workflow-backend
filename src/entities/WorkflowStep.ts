@@ -55,6 +55,10 @@ export class WorkflowStep extends Base<WorkflowStep> {
   @TypeormLoader()
   layouts: Lazy<WorkflowLayout[]>;
 
+  @Field({ nullable: true })
+  @Column({ nullable: true })
+  order: number;
+
   @Field(() => [WorkflowEvent])
   @OneToMany(() => WorkflowEvent, (event) => event.target, { lazy: true })
   targetedEvents: Lazy<WorkflowEvent[]>;

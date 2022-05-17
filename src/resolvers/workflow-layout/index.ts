@@ -6,6 +6,8 @@ import { WorkflowStep } from "../../entities/WorkflowStep";
 import { WorkflowLayout } from "../../entities/WorkflowLayout";
 import { WorkflowLayoutCreateInput } from "./inputs/WorkflowLayoutCreateInput";
 import { WorkflowLayoutUpdateInput } from "./inputs/WorkflowLayoutUpdateInput";
+import { OrderMutationResult } from "../common/types/OrderMutationResult";
+import { OrderInput } from "../common/inputs/OrderInput";
 
 @Resolver(() => WorkflowLayout)
 export class WorkflowLayoutResolver {
@@ -60,5 +62,27 @@ export class WorkflowLayoutResolver {
     await repository.delete(layout.id);
 
     return layout;
+  }
+
+  @Mutation(() => OrderMutationResult, { nullable: true })
+  async updateWorkflowLayoutsOrder(
+    @Arg("orders", () => [OrderInput]) orders: OrderInput[],
+    @Repo(WorkflowLayout) repository: Repository<WorkflowLayout>
+  ): Promise<OrderMutationResult> {
+    try {
+      await repository.manager.transaction(async (manager) => {
+        for (const order of orders) {
+          await manager
+            .createQueryBuilder()
+            .update(WorkflowLayout)
+            .set({ order: order.order })
+            .where({ id: order.id })
+            .execute();
+        }
+      });
+      return { updated: true };
+    } catch {
+      return { updated: false };
+    }
   }
 }

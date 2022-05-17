@@ -12,4 +12,4 @@ fi
 
 npm run build
 gcloud builds submit --project ${PROJECT_ID} --tag gcr.io/${PROJECT_ID}/prodeo-backend:${VERSION} .
-npm run migration:run
+npm run mrun

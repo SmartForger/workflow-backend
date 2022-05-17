@@ -31,6 +31,10 @@ export class WorkflowEvent extends Base<WorkflowEvent> {
   @TypeormLoader()
   target: Lazy<WorkflowStep | null>;
 
+  @Field({ nullable: true })
+  @Column({ nullable: true })
+  order: number;
+
   @Field(() => WorkflowStep)
   @ManyToOne(() => WorkflowStep, (step) => step.events, {
     lazy: true,

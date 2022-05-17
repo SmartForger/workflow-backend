@@ -42,6 +42,10 @@ export class WorkflowLayout extends Base<WorkflowLayout> {
   @Column({ nullable: true })
   visible: boolean;
 
+  @Field({ nullable: true })
+  @Column({ nullable: true })
+  order: number;
+
   @Field()
   @Column({
     type: "enum",

@@ -6,6 +6,8 @@ import { WorkflowStep } from "../../entities/WorkflowStep";
 import { Workflow } from "../../entities/Workflow";
 import { WorkflowStepCreateInput } from "./inputs/WorkflowStepCreateInput";
 import { WorkflowStepUpdateInput } from "./inputs/WorkflowStepUpdateInput";
+import { OrderMutationResult } from "../common/types/OrderMutationResult";
+import { OrderInput } from "../common/inputs/OrderInput";
 
 @Resolver(() => WorkflowStep)
 export class WorkflowStepResolver {
@@ -60,5 +62,27 @@ export class WorkflowStepResolver {
     await repository.delete(step.id);
 
     return step;
+  }
+
+  @Mutation(() => OrderMutationResult, { nullable: true })
+  async updateWorkflowStepsOrder(
+    @Arg("orders", () => [OrderInput]) orders: OrderInput[],
+    @Repo(WorkflowStep) repository: Repository<WorkflowStep>
+  ): Promise<OrderMutationResult> {
+    try {
+      await repository.manager.transaction(async (manager) => {
+        for (const order of orders) {
+          await manager
+            .createQueryBuilder()
+            .update(WorkflowStep)
+            .set({ order: order.order })
+            .where({ id: order.id })
+            .execute();
+        }
+      });
+      return { updated: true };
+    } catch {
+      return { updated: false };
+    }
   }
 }

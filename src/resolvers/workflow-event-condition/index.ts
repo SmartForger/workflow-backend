@@ -6,6 +6,8 @@ import { WorkflowEventConditionCreateInput } from "./inputs/WorkflowEventConditi
 import { WorkflowEventConditionUpdateInput } from "./inputs/WorkflowEventConditionUpdateInput";
 import { WorkflowEventCondition } from "../../entities/WorkflowEventCondition";
 import { WorkflowEvent } from "../../entities/WorkflowEvent";
+import { OrderMutationResult } from "../common/types/OrderMutationResult";
+import { OrderInput } from "../common/inputs/OrderInput";
 
 @Resolver(() => WorkflowEventCondition)
 export class WorkflowEventConditionResolver {
@@ -62,5 +64,27 @@ export class WorkflowEventConditionResolver {
     await repository.delete(eventCondition.id);
 
     return eventCondition;
+  }
+
+  @Mutation(() => OrderMutationResult, { nullable: true })
+  async updateWorkflowEventConditionsOrder(
+    @Arg("orders", () => [OrderInput]) orders: OrderInput[],
+    @Repo(WorkflowEventCondition) repository: Repository<WorkflowEventCondition>
+  ): Promise<OrderMutationResult> {
+    try {
+      await repository.manager.transaction(async (manager) => {
+        for (const order of orders) {
+          await manager
+            .createQueryBuilder()
+            .update(WorkflowEventCondition)
+            .set({ order: order.order })
+            .where({ id: order.id })
+            .execute();
+        }
+      });
+      return { updated: true };
+    } catch {
+      return { updated: false };
+    }
   }
 }

@@ -1,4 +1,4 @@
-import { Field, InputType } from "type-graphql";
+import { Field, InputType, Int } from "type-graphql";
 import { WorkflowWidget } from "../../../entities/WorkflowWidget";
 
 @InputType()
@@ -10,23 +10,26 @@ export class WorkflowWidgetCreateInput implements Partial<WorkflowWidget> {
   name: string;
 
   @Field({ nullable: true })
-  description: string;
+  description?: string;
 
   @Field({ nullable: true })
-  icon: string;
+  icon?: string;
 
   @Field({ nullable: true })
-  iconFileName: string;
+  iconFileName?: string;
 
   @Field({ nullable: true })
-  field: string;
+  field?: string;
 
   @Field({ nullable: true })
-  event: string;
+  event?: string;
 
   @Field({ nullable: true })
-  stepId: string;
+  stepId?: string;
 
   @Field({ nullable: true })
-  layoutId: string;
+  layoutId?: string;
+
+  @Field(() => Int, { nullable: true })
+  order?: number;
 }

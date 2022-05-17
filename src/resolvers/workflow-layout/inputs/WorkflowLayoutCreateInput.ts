@@ -1,4 +1,4 @@
-import { Field, InputType } from "type-graphql";
+import { Field, InputType, Int } from "type-graphql";
 import {
   WorkflowLayout,
   WorkflowLayoutType,
@@ -13,19 +13,22 @@ export class WorkflowLayoutCreateInput implements Partial<WorkflowLayout> {
   type: WorkflowLayoutType;
 
   @Field({ nullable: true })
-  icon: string;
+  icon?: string;
 
   @Field({ nullable: true })
-  iconFileName: string;
+  iconFileName?: string;
 
   @Field({ nullable: true })
-  backgroundColor: string;
+  backgroundColor?: string;
 
   @Field({ nullable: true })
-  textColor: string;
+  textColor?: string;
 
   @Field({ nullable: true })
-  visible: boolean;
+  visible?: boolean;
+
+  @Field(() => Int, { nullable: true })
+  order?: number;
 
   @Field()
   stepId: string;

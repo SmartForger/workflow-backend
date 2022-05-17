@@ -1,4 +1,4 @@
-import { Field, InputType } from "type-graphql";
+import { Field, InputType, Int } from "type-graphql";
 
 @InputType()
 export class WorkflowEventActionCreateInput {
@@ -7,4 +7,7 @@ export class WorkflowEventActionCreateInput {
 
   @Field()
   eventId: string;
+
+  @Field(() => Int, { nullable: true })
+  order?: number;
 }

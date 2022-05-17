@@ -1,6 +1,6 @@
 import { Field, ID, ObjectType } from "type-graphql";
 import { TypeormLoader } from "type-graphql-dataloader";
-import { Entity, PrimaryColumn, ManyToOne } from "typeorm";
+import { Entity, PrimaryColumn, ManyToOne, Column } from "typeorm";
 import { Base } from "../types/Base";
 import { Lazy } from "../types/Lazy";
 import { WorkflowAction } from "./WorkflowAction";
@@ -21,6 +21,10 @@ export class WorkflowEventAction extends Base<WorkflowEventAction> {
   })
   @TypeormLoader()
   info: Lazy<WorkflowAction | null>;
+
+  @Field({ nullable: true })
+  @Column({ nullable: true })
+  order: number;
 
   @Field(() => WorkflowEvent)
   @ManyToOne(() => WorkflowEvent, (event) => event.conditions, {
