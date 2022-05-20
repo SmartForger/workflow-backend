@@ -279,6 +279,7 @@ type WorkflowWidget {
   layout: WorkflowLayout!
   name: String!
   order: Float
+  rules: String
   step: WorkflowStep!
   type: String!
 }
@@ -293,6 +294,7 @@ input WorkflowWidgetCreateInput {
   layoutId: String
   name: String!
   order: Int
+  rules: String
   stepId: String
   type: String!
 }
@@ -308,6 +310,7 @@ input WorkflowWidgetUpdateInput {
   layoutId: String
   name: String
   order: Int
+  rules: String
   stepId: String
   type: String
 }

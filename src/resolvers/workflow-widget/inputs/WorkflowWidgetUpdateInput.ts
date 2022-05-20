@@ -28,6 +28,9 @@ export class WorkflowWidgetUpdateInput implements Partial<WorkflowWidget> {
   event?: string;
 
   @Field({ nullable: true })
+  rules?: string;
+
+  @Field({ nullable: true })
   extra?: string;
 
   @Field({ nullable: true })
