@@ -44,6 +44,10 @@ export class WorkflowWidget extends Base<WorkflowWidget> {
   @Column({ nullable: true })
   order: number;
 
+  @Field({ nullable: true })
+  @Column({ nullable: true })
+  extra: string;
+
   @Field(() => WorkflowStep)
   @ManyToOne(() => WorkflowStep, (step) => step.events, {
     lazy: true,

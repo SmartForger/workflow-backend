@@ -18,6 +18,7 @@ import { updateWorkflowEvent1652353327927 } from "./migrations/1652353327927-upd
 import { updateWorkflowLayout1652355753221 } from "./migrations/1652355753221-updateWorkflowLayout";
 import { updateWorkflowWidget1652356454750 } from "./migrations/1652356454750-updateWorkflowWidget";
 import { addOrderField1652416795498 } from "./migrations/1652416795498-addOrderField";
+import { addExtraToWidget1652951747293 } from "./migrations/1652951747293-addExtraToWidget";
 
 const dataSource = new DataSource({
   type: "postgres",
@@ -48,6 +49,7 @@ const dataSource = new DataSource({
     updateWorkflowLayout1652355753221,
     updateWorkflowWidget1652356454750,
     addOrderField1652416795498,
+    addExtraToWidget1652951747293,
   ],
 });
 

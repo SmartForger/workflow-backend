@@ -271,6 +271,7 @@ input WorkflowUpdateInput {
 type WorkflowWidget {
   description: String
   event: String
+  extra: String
   field: String
   icon: String
   iconFileName: String
@@ -285,6 +286,7 @@ type WorkflowWidget {
 input WorkflowWidgetCreateInput {
   description: String
   event: String
+  extra: String
   field: String
   icon: String
   iconFileName: String
@@ -298,6 +300,7 @@ input WorkflowWidgetCreateInput {
 input WorkflowWidgetUpdateInput {
   description: String
   event: String
+  extra: String
   field: String
   icon: String
   iconFileName: String

@@ -25,6 +25,9 @@ export class WorkflowWidgetCreateInput implements Partial<WorkflowWidget> {
   event?: string;
 
   @Field({ nullable: true })
+  extra?: string;
+
+  @Field({ nullable: true })
   stepId?: string;
 
   @Field({ nullable: true })
